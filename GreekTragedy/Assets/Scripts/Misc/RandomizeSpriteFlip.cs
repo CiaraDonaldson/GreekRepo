@@ -28,7 +28,7 @@ public class RandomizeSpriteFlip : MonoBehaviour
                 break;
 
             case FlipState.FlipY:
-                    _sRend.flipY = FlipSprite(flip);
+                _sRend.flipY = FlipSprite(flip);
                 if (spriteToMatch != null)
                     spriteToMatch.flipY = _sRend.flipY;
                 break;

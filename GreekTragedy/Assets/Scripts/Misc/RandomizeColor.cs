@@ -16,7 +16,7 @@ public sealed class RandomizeColor : MonoBehaviour
                 m.color = m_colors[Random.Range(0, m_colors.Length)];
         }
         else
-        foreach (var m in m_rend.materials)
-            m.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            foreach (var m in m_rend.materials)
+                m.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 }

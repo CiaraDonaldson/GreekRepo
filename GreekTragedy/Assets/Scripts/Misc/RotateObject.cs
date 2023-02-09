@@ -4,14 +4,11 @@ using Random = UnityEngine.Random;
 
 public sealed class RotateObject : MonoBehaviour
 {
-    public static event Action<GameObject> OnObjectCreated;
     public bool isRotating = true;
     [SerializeField] Vector3 rotateVector;
-    [SerializeField] Vector2 minMaxRotateSpeed;
+    [SerializeField, Tooltip("Set both x and y to same value to not get random speeds")] Vector2 minMaxRotateSpeed;
     [SerializeField] bool randomizeRotation;
     float currentRotateSpeed;
-
-    void Start() => OnObjectCreated?.Invoke(gameObject);
 
     private void OnEnable()
     {
