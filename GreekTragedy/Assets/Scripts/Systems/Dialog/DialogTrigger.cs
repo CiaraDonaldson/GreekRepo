@@ -1,21 +1,20 @@
 using darcproducts;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
 /// Dialog struct to hold a speaker name to display, a line that speaker says, and an image to display if there is one
 /// </summary>
 [System.Serializable]
-public struct DialogLine
+public sealed class DialogLine
 {
     public string speaker;
-    [TextArea(0, 10)] public string line;
+    public string line;
     public Image image;
-    public DialogLine[] choices;
 }
 
 /// <summary>
@@ -23,13 +22,11 @@ public struct DialogLine
 /// </summary>
 public sealed class DialogTrigger : MonoBehaviour
 {
-    [SerializeField] GameEvent OnDialogStarted;
-    [SerializeField] GameEvent OnDialogFinished;
     [Tooltip("For speeding up or slowing base text speed.")]
     public float textSpeedMultiplier = 1;
     [SerializeField] bool startOnLoad;
-    [SerializeField, Tooltip("Delay before dialog begins, in Seconds")] 
-    float preDialogDelay= 1;
+    [SerializeField, Tooltip("Delay before dialog begins, in Seconds")]
+    float preDialogDelay = 1;
     [SerializeField] DialogLine[] dialog;
     [SerializeField] TMP_Text talkerNameText;
     [SerializeField] TMP_Text talkerDialogText;
@@ -38,12 +35,15 @@ public sealed class DialogTrigger : MonoBehaviour
     [SerializeField] float timeBetweenDialogLines;
     [SerializeField] bool useTrigger;
     [SerializeField] LayerMask triggerLayers;
+    [SerializeField] UnityEvent OnDialogStarted;
+    [SerializeField] UnityEvent OnDialogFinished;
     Queue<DialogLine> _currentLines = new();
     bool _hasStarted = false;
 
     private void Start()
     {
-        _currentLines = (Queue<DialogLine>)dialog.Clone();
+        foreach (var l in dialog)
+            _currentLines.Enqueue(l);
         if (!useTrigger && startOnLoad)
             Trigger();
     }
@@ -56,32 +56,38 @@ public sealed class DialogTrigger : MonoBehaviour
     IEnumerator TriggerDialog()
     {
         if (talkerDialogText == null || talkerNameText == null) yield return null;
-        if (_currentLines.Count == 0 || _hasStarted) yield return null;
-        OnDialogStarted.Invoke(gameObject);
+        if (_hasStarted) yield return null;
+        OnDialogStarted.Invoke();
         _hasStarted = true;
         yield return new WaitForSecondsRealtime(preDialogDelay);
-        DialogLine dialog = _currentLines.Dequeue();
-        talkerNameText.text = dialog.speaker;
-        talkerDialogText.text = string.Empty;
-
-        if (targetImage != null && dialog.image != null)
-            targetImage.sprite = dialog.image.sprite;
-
-        foreach (var character in dialog.line)
+        if (_currentLines.TryPeek(out DialogLine dialog))
         {
-            yield return new WaitForSecondsRealtime(textSpeed * textSpeedMultiplier);
-            talkerDialogText.text += character;
+            if (dialog == null) yield return null;
+            if (dialog.speaker == string.Empty) yield return null;
+            talkerNameText.text = dialog.speaker;
+            talkerDialogText.text = string.Empty;
+
+            if (targetImage != null && dialog.image != null)
+                targetImage.sprite = dialog.image.sprite;
+
+            foreach (var character in dialog.line)
+            {
+                yield return new WaitForSecondsRealtime(textSpeed * textSpeedMultiplier);
+                talkerDialogText.text += character;
+            }
+
+            yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
         }
-
-        yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
-
-        if (_currentLines.Count != 0 && dialog.choices.Length == 0)
+        if (_currentLines.Count != 0)
         {
             _hasStarted = false;
             StartCoroutine(TriggerDialog());
         }
         else
-            OnDialogFinished.Invoke(gameObject);
+        {
+            _hasStarted = false;
+            OnDialogFinished.Invoke();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
