@@ -28,13 +28,11 @@ public sealed class DialogTrigger : MonoBehaviour
     [SerializeField, Tooltip("Delay before dialog begins, in Seconds")]
     float preDialogDelay = 1;
     [SerializeField] DialogLine[] dialog;
-    [SerializeField] TMP_Text talkerNameText;
-    [SerializeField] TMP_Text talkerDialogText;
+    [SerializeField] TMP_Text talkerNameTMPText;
+    [SerializeField] TMP_Text talkerDialogTMPText;
     [SerializeField] Image targetImage;
     [SerializeField] float textSpeed;
     [SerializeField] float timeBetweenDialogLines;
-    [SerializeField] bool useTrigger;
-    [SerializeField] LayerMask triggerLayers;
     [SerializeField] UnityEvent OnDialogStarted;
     [SerializeField] UnityEvent OnDialogFinished;
     Queue<DialogLine> _currentLines = new();
@@ -44,7 +42,7 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         foreach (var l in dialog)
             _currentLines.Enqueue(l);
-        if (!useTrigger && startOnLoad)
+        if (startOnLoad)
             Trigger();
     }
 
@@ -55,7 +53,7 @@ public sealed class DialogTrigger : MonoBehaviour
 
     IEnumerator TriggerDialog()
     {
-        if (talkerDialogText == null || talkerNameText == null) yield return null;
+        if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
         if (_hasStarted) yield return null;
         OnDialogStarted.Invoke();
         _hasStarted = true;
@@ -64,8 +62,8 @@ public sealed class DialogTrigger : MonoBehaviour
         {
             if (dialog == null) yield return null;
             if (dialog.speaker == string.Empty) yield return null;
-            talkerNameText.text = dialog.speaker;
-            talkerDialogText.text = string.Empty;
+            talkerNameTMPText.text = dialog.speaker;
+            talkerDialogTMPText.text = string.Empty;
 
             if (targetImage != null && dialog.image != null)
                 targetImage.sprite = dialog.image.sprite;
@@ -73,7 +71,7 @@ public sealed class DialogTrigger : MonoBehaviour
             foreach (var character in dialog.line)
             {
                 yield return new WaitForSecondsRealtime(textSpeed * textSpeedMultiplier);
-                talkerDialogText.text += character;
+                talkerDialogTMPText.text += character;
             }
 
             yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
@@ -88,11 +86,5 @@ public sealed class DialogTrigger : MonoBehaviour
             _hasStarted = false;
             OnDialogFinished.Invoke();
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!Utilities.IsInLayerMask(other.gameObject, triggerLayers) | !useTrigger | startOnLoad) return;
-        Trigger();
     }
 }

@@ -346,8 +346,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Health:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1b0f64e621a283c4b86bf94426771b11, type: 2}
+  m_sharedMaterial: {fileID: 6568458717570567956, guid: 1b0f64e621a283c4b86bf94426771b11, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 861891932}
   - component: {fileID: 861891931}
   - component: {fileID: 861891933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682bdeb4dca68954abf72c53a0d107b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackKey: 323
+  attackDamage: 1
   meleeAttackDistance: 2
+  meleeAttackRadius: 1
+  attackDelay: 0.4
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  OnAttackMissed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &861891932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +755,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1669186831}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -828,8 +842,8 @@ MonoBehaviour:
   startOnLoad: 1
   preDialogDelay: 1
   dialog: []
-  talkerNameText: {fileID: 0}
-  talkerDialogText: {fileID: 0}
+  talkerNameTMPText: {fileID: 0}
+  talkerDialogTMPText: {fileID: 0}
   targetImage: {fileID: 0}
   textSpeed: 0.25
   timeBetweenDialogLines: 2
@@ -891,8 +905,8 @@ MonoBehaviour:
   startOnLoad: 0
   preDialogDelay: 1
   dialog: []
-  talkerNameText: {fileID: 0}
-  talkerDialogText: {fileID: 0}
+  talkerNameTMPText: {fileID: 0}
+  talkerDialogTMPText: {fileID: 0}
   targetImage: {fileID: 0}
   textSpeed: 0
   timeBetweenDialogLines: 0
@@ -1039,8 +1053,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1602727744}
+  - component: {fileID: 1602727745}
   m_Layer: 0
-  m_Name: IntroMusic
+  m_Name: IntroMusic (if any)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1061,6 +1076,20 @@ Transform:
   m_Father: {fileID: 849118222}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1602727745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602727743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b603d2554eb2a0c4badeb88eb7fde6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 32
+  TurnOff: 1
 --- !u!1 &1646881595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,13 +1252,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669186828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1094007799}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900555976
 GameObject:
@@ -1266,8 +1295,8 @@ Camera:
   m_GameObject: {fileID: 1900555976}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

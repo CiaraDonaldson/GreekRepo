@@ -31,6 +31,9 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         }
     }
 
+    /// <summary>
+    /// Removes health icon, used through OnPlayerDamaged event.
+    /// </summary>
     public void RemoveHealthIcon()
     {
         if (healthIcons.Count == 0) return;
