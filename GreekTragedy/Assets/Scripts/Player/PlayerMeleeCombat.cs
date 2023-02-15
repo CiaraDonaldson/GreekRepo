@@ -1,6 +1,8 @@
+using darcproducts;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerMeleeCombat : MonoBehaviour
 {
@@ -9,9 +11,11 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] float meleeAttackDistance;
     [SerializeField] float meleeAttackRadius;
     [SerializeField] float attackDelay; // to prevent spamming
+    [SerializeField] Image attackIndicator;
     [SerializeField] LayerMask hitLayers;
     [SerializeField] UnityEvent<GameObject> OnAttackMissed, OnAttackHit; // used for attack FX
     bool canAttack = true;
+    float _attackTime;
     Vector2 _attackPosition;
     Camera _cam;
 
@@ -21,7 +25,10 @@ public class PlayerMeleeCombat : MonoBehaviour
         private set { }
     }
 
-    void Start() => _cam = Camera.main;
+    void Start()
+    {
+        _cam = Camera.main;
+    }
 
     IEnumerator ResetAttack()
     {
@@ -32,6 +39,8 @@ public class PlayerMeleeCombat : MonoBehaviour
     void Update()
     {
         Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        _attackTime = _attackTime > attackDelay ? attackDelay : _attackTime += Time.deltaTime;
+        attackIndicator.fillAmount = Utilities.Remap(_attackTime, 0, attackDelay, 0, 1);
         _attackPosition = (Vector2)transform.position + (mousePos - (Vector2)transform.position).normalized * meleeAttackDistance;
         if (Input.GetKeyDown(attackKey))
             AttacKTargets();
@@ -42,6 +51,7 @@ public class PlayerMeleeCombat : MonoBehaviour
         if (canAttack)
         {
             canAttack = false;
+            _attackTime = 0;
             Collider2D[] hitTargets = Physics2D.OverlapCircleAll(_attackPosition, meleeAttackRadius, hitLayers);
             if (hitTargets.Length == 0)
             {
