@@ -22,6 +22,7 @@ public sealed class DialogLine
 /// </summary>
 public sealed class DialogTrigger : MonoBehaviour
 {
+    [SerializeField] Canvas dialogCanvas;
     [Tooltip("For speeding up or slowing base text speed.")]
     public float textSpeedMultiplier = 1;
     [SerializeField] bool startOnLoad;
@@ -40,6 +41,7 @@ public sealed class DialogTrigger : MonoBehaviour
 
     private void Start()
     {
+        dialogCanvas.gameObject.SetActive(false);
         foreach (var l in dialog)
             _currentLines.Enqueue(l);
         if (startOnLoad)
@@ -55,6 +57,7 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
         if (_hasStarted) yield return null;
+        dialogCanvas.gameObject.SetActive(true);
         OnDialogStarted.Invoke();
         _hasStarted = true;
         yield return new WaitForSecondsRealtime(preDialogDelay);
@@ -66,7 +69,12 @@ public sealed class DialogTrigger : MonoBehaviour
             talkerDialogTMPText.text = string.Empty;
 
             if (targetImage != null && dialog.image != null)
+            {
                 targetImage.sprite = dialog.image.sprite;
+                targetImage.color = new Color(1, 1, 1, 1);
+            }
+            else
+                targetImage.color = new Color(1, 1, 1, 0);
 
             foreach (var character in dialog.line)
             {
