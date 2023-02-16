@@ -13,7 +13,8 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] float attackDelay; // to prevent spamming
     [SerializeField] Image attackIndicator;
     [SerializeField] LayerMask hitLayers;
-    [SerializeField] UnityEvent<GameObject> OnAttackMissed, OnAttackHit; // used for attack FX
+    [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
+    [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
     bool canAttack = true;
     float _attackTime;
     Vector2 _attackPosition;
@@ -55,7 +56,7 @@ public class PlayerMeleeCombat : MonoBehaviour
             Collider2D[] hitTargets = Physics2D.OverlapCircleAll(_attackPosition, meleeAttackRadius, hitLayers);
             if (hitTargets.Length == 0)
             {
-                OnAttackMissed?.Invoke(gameObject);
+                OnAttackMissed?.Invoke(_attackPosition);
                 StartCoroutine(ResetAttack());
                 return;
             }

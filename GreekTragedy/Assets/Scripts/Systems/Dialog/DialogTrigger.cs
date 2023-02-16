@@ -29,22 +29,32 @@ public sealed class DialogTrigger : MonoBehaviour
     [SerializeField] DialogLine[] dialog;
     [SerializeField] TMP_Text talkerNameTMPText;
     [SerializeField] TMP_Text talkerDialogTMPText;
+    [SerializeField] TMP_Text continueDialogText;
     [SerializeField] Image targetImage;
     [SerializeField] float textSpeed;
     [SerializeField] float timeBetweenDialogLines;
+    [SerializeField] KeyCode continueDialogKey = KeyCode.Space;
     [SerializeField] UnityEvent OnDialogStarted;
     [SerializeField] UnityEvent OnDialogFinished;
     readonly Queue<DialogLine> _currentLines = new();
+    bool _continueKeyPressed;
     bool _hasStarted = false;
 
     private void Start()
     {
+        continueDialogText.text = $"Press '{continueDialogKey}' to continue...";
         if (dialogCanvas != null)
             dialogCanvas.gameObject.SetActive(false);
         foreach (var l in dialog)
             _currentLines.Enqueue(l);
         if (startOnLoad)
             Trigger();
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(continueDialogKey)) return;
+        _continueKeyPressed = true;
     }
 
     [ContextMenu(nameof(Trigger))]
@@ -57,6 +67,7 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
         if (_hasStarted) yield return null;
+        continueDialogText.gameObject.SetActive(false);
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(preDialogDelay);
         _hasStarted = true;
@@ -87,6 +98,9 @@ public sealed class DialogTrigger : MonoBehaviour
             yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
             _currentLines.Dequeue();
         }
+        continueDialogText.gameObject.SetActive(true);
+        yield return new WaitUntil(() => _continueKeyPressed);
+        _continueKeyPressed = false;
         if (_currentLines.Count != 0)
         {
             _hasStarted = false;

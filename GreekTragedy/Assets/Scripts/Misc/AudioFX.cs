@@ -11,6 +11,7 @@ public sealed class AudioFX : MonoBehaviour
 
     [SerializeField] private PlayType currentPlayType;
     [SerializeField] private bool useSource = true;
+    [SerializeField] bool playClipAtPoint;
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip[] clips;
     [SerializeField] private Vector2 minMaxVolume;
@@ -26,6 +27,8 @@ public sealed class AudioFX : MonoBehaviour
 
     public void PlayFX(GameObject target)
     {
+        if (clips == null) return;
+        if (clips.Length == 0) return;
         AudioClip clipToPlay = clips[Random.Range(0, clips.Length)];
         if (clipToPlay == null) return;
         if (source != null)
@@ -36,7 +39,7 @@ public sealed class AudioFX : MonoBehaviour
         switch (currentPlayType)
         {
             case PlayType.PlayOneShot:
-                if (!useSource && target != null)
+                if (!useSource && playClipAtPoint && target != null)
                     AudioSource.PlayClipAtPoint(clipToPlay, target.transform.position, Random.Range(minMaxVolume.x, minMaxVolume.y));
                 else if (source != null)
                     source.PlayOneShot(clipToPlay);

@@ -1,9 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Deer : Enemy
+public sealed class Deer : Enemy
 {
+    public enum DeerState
+    {
+        Moving,
+        Attacking,
+        Fleeing
+    }
+
+    public DeerState currentState;
     public float easing;
     public Vector2 minMaxRandomWait;
     Vector2 targetLocation;
@@ -23,9 +30,9 @@ public class Deer : Enemy
 
     private void FixedUpdate()
     {
-        switch (currentEnemyState)
+        switch (currentState)
         {
-            case EnemyState.Moving:
+            case DeerState.Moving:
                 transform.position = Vector2.MoveTowards((Vector2)transform.position, targetLocation, easing);
                 if ((Vector2)transform.position == targetLocation)
                 {
@@ -36,9 +43,9 @@ public class Deer : Enemy
                     }
                 }
                 break;
-            case EnemyState.attacking:
+            case DeerState.Attacking:
                 break;
-            case EnemyState.Fleeing:
+            case DeerState.Fleeing:
                 break;
         }
     }
