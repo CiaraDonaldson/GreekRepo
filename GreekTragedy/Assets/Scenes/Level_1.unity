@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogCanvas: {fileID: 0}
+  dialogCanvas: {fileID: 1602735317}
   textSpeedMultiplier: 3
   startOnLoad: 1
   preDialogDelay: 1
@@ -1391,9 +1391,9 @@ MonoBehaviour:
   - speaker: 
     line: 
     image: {fileID: 0}
-  talkerNameTMPText: {fileID: 0}
-  talkerDialogTMPText: {fileID: 0}
-  targetImage: {fileID: 0}
+  talkerNameTMPText: {fileID: 489208502}
+  talkerDialogTMPText: {fileID: 1610036855}
+  targetImage: {fileID: 956493673}
   textSpeed: 0.25
   timeBetweenDialogLines: 2
   OnDialogStarted:
