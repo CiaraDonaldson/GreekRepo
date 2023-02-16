@@ -1555,18 +1555,18 @@ MonoBehaviour:
   dialog:
   - speaker: Hermes
     line: Are you alright Artemis?
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
   - speaker: Artemis
     line: I am, Have you seen Apollo?
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
   - speaker: Hermes
     line: "He\u2019s currently in Mount Olympus, but there\u2019s no way in or out
       due to the fates magic."
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
   - speaker: Artemis
     line: "I see, I\u2019ll go to the fates and see if they require anything of me,
       but before I go I will give you this bow. Use it in earnest."
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
   talkerNameTMPText: {fileID: 489208502}
   talkerDialogTMPText: {fileID: 1610036855}
   targetImage: {fileID: 956493673}
