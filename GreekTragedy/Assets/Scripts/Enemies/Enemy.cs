@@ -1,10 +1,18 @@
 using System;
 using UnityEngine;
 
+public enum EnemyState
+{
+    Moving,
+    attacking,
+    Fleeing
+}
+
 public abstract class Enemy : MonoBehaviour, IDamagable
 {
     public static event Action<GameObject> OnEnemyDamaged;
     public static event Action<GameObject> OnEnemyDied;
+    public EnemyState currentEnemyState;
     public int maxHealth;
     public float moveSpeed;
     private float _currentHealth;

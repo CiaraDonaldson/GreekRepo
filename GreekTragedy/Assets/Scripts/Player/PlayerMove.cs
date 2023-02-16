@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static Vector2 ROOM_CENTER, ROOM_SIZE;
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 roomCenter;
     [SerializeField] Vector2 roomSize;
@@ -26,5 +27,11 @@ public class PlayerMove : MonoBehaviour
         Gizmos.DrawWireCube(roomCenter, roomSize);
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(roomCenter, roomSize - playerOffset);
+    }
+
+    private void OnValidate()
+    {
+        ROOM_SIZE = roomSize;
+        ROOM_CENTER = roomCenter;
     }
 }

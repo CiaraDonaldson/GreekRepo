@@ -13,7 +13,7 @@ public sealed class DialogLine
 {
     public string speaker;
     public string line;
-    public Image image;
+    public Sprite image;
 }
 
 /// <summary>
@@ -72,7 +72,7 @@ public sealed class DialogTrigger : MonoBehaviour
 
             if (targetImage != null && dialog.image != null)
             {
-                targetImage.sprite = dialog.image.sprite;
+                targetImage.sprite = dialog.image;
                 targetImage.color = new Color(1, 1, 1, 1);
             }
             else
