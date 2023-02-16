@@ -16,6 +16,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         _currentHealth = _currentHealth -= amount == 0 ? 0 : _currentHealth -= amount;
         OnEnemyDamaged?.Invoke(gameObject);
         if (_currentHealth != 0) return;
-        OnEnemyDied?.Invoke(gameObject);        
+        OnEnemyDied?.Invoke(gameObject);
     }
 }

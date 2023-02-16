@@ -1,4 +1,3 @@
-using darcproducts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -41,13 +40,15 @@ public sealed class DialogTrigger : MonoBehaviour
 
     private void Start()
     {
-        dialogCanvas.gameObject.SetActive(false);
+        if (dialogCanvas != null)
+            dialogCanvas.gameObject.SetActive(false);
         foreach (var l in dialog)
             _currentLines.Enqueue(l);
         if (startOnLoad)
             Trigger();
     }
 
+    [ContextMenu(nameof(Trigger))]
     /// <summary>
     /// Public call to trigger dialog line if called from another source
     /// </summary>
@@ -57,10 +58,11 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
         if (_hasStarted) yield return null;
-        dialogCanvas.gameObject.SetActive(true);
-        OnDialogStarted.Invoke();
-        _hasStarted = true;
         yield return new WaitForSecondsRealtime(preDialogDelay);
+        _hasStarted = true;
+        if (dialogCanvas != null)
+            dialogCanvas.gameObject.SetActive(true);
+        OnDialogStarted.Invoke();
         if (_currentLines.TryPeek(out DialogLine dialog))
         {
             if (dialog == null) yield return null;
@@ -83,11 +85,12 @@ public sealed class DialogTrigger : MonoBehaviour
             }
 
             yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
+            _currentLines.Dequeue();
         }
         if (_currentLines.Count != 0)
         {
             _hasStarted = false;
-            StartCoroutine(TriggerDialog());
+            Trigger();
         }
         else
         {

@@ -11,5 +11,6 @@ public class TriggeredEvent : MonoBehaviour
     {
         if (!darcproducts.Utilities.IsInLayerMask(collision.gameObject, triggerLayer)) return;
         OnTriggered?.Invoke(gameObject);
+        gameObject.SetActive(false);
     }
 }

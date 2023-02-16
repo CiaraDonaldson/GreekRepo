@@ -787,6 +787,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652404921}
   m_CullTransparentMesh: 1
+--- !u!1 &737510461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737510462}
+  - component: {fileID: 737510463}
+  - component: {fileID: 737510464}
+  m_Layer: 0
+  m_Name: Level End Dialog Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &737510462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737510461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1122429357}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &737510463
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737510461}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &737510464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737510461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493b1880214bed045b1f64dd19de3cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  OnTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1397012199}
+        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &849118221
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +913,7 @@ GameObject:
   - component: {fileID: 861891932}
   - component: {fileID: 861891931}
   - component: {fileID: 861891933}
+  - component: {fileID: 861891935}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -949,7 +1029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   roomCenter: {x: 0, y: 0}
-  roomSize: {x: 20, y: 10}
+  roomSize: {x: 22, y: 12}
   playerOffset: {x: 0.5, y: 1}
 --- !u!70 &861891933
 CapsuleCollider2D:
@@ -1000,6 +1080,27 @@ MonoBehaviour:
   OnPlayerDied:
     m_PersistentCalls:
       m_Calls: []
+--- !u!50 &861891935
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861891928}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 60
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &869362885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1335,7 @@ Transform:
   - {fileID: 1900555979}
   - {fileID: 861891929}
   - {fileID: 364779109}
+  - {fileID: 737510462}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1253,7 +1355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1156624904
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,10 +1383,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogCanvas: {fileID: 0}
   textSpeedMultiplier: 3
   startOnLoad: 1
   preDialogDelay: 1
-  dialog: []
+  dialog:
+  - speaker: 
+    line: 
+    image: {fileID: 0}
   talkerNameTMPText: {fileID: 0}
   talkerDialogTMPText: {fileID: 0}
   targetImage: {fileID: 0}
@@ -1340,15 +1446,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogCanvas: {fileID: 1602735317}
   textSpeedMultiplier: 3
   startOnLoad: 0
   preDialogDelay: 1
-  dialog: []
-  talkerNameTMPText: {fileID: 0}
-  talkerDialogTMPText: {fileID: 0}
-  targetImage: {fileID: 0}
-  textSpeed: 0
-  timeBetweenDialogLines: 0
+  dialog:
+  - speaker: Hermes
+    line: Are you alright Artemis?
+    image: {fileID: 0}
+  - speaker: Artemis
+    line: I am, Have you seen Apollo?
+    image: {fileID: 0}
+  - speaker: Hermes
+    line: "He\u2019s currently in Mount Olympus, but there\u2019s no way in or out
+      due to the fates magic."
+    image: {fileID: 0}
+  - speaker: Artemis
+    line: "I see, I\u2019ll go to the fates and see if they require anything of me,
+      but before I go I will give you this bow. Use it in earnest."
+    image: {fileID: 0}
+  talkerNameTMPText: {fileID: 489208502}
+  talkerDialogTMPText: {fileID: 1610036855}
+  targetImage: {fileID: 956493673}
+  textSpeed: 0.02
+  timeBetweenDialogLines: 2
   OnDialogStarted:
     m_PersistentCalls:
       m_Calls: []
