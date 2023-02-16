@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -378,8 +378,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 140, y: 202}
-  m_SizeDelta: {x: 242, y: 54}
+  m_AnchoredPosition: {x: 120, y: 202}
+  m_SizeDelta: {x: 200, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331116070
 MonoBehaviour:
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 489208503}
   - component: {fileID: 489208502}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Speaker Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,8 +577,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Speaker
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c5ccb9cf51590834690eb58299f0208a, type: 2}
-  m_sharedMaterial: {fileID: -5944879298775059168, guid: c5ccb9cf51590834690eb58299f0208a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d85a9e911e172b54e8bf13e61d9e8bdc, type: 2}
+  m_sharedMaterial: {fileID: 7716717694653937370, guid: d85a9e911e172b54e8bf13e61d9e8bdc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -877,7 +877,8 @@ GameObject:
   - component: {fileID: 824957327}
   - component: {fileID: 824957328}
   - component: {fileID: 824957329}
-  m_Layer: 0
+  - component: {fileID: 824957330}
+  m_Layer: 6
   m_Name: Deer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +894,7 @@ Transform:
   m_GameObject: {fileID: 824957326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1122429357}
@@ -940,7 +941,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a904735333676848a63bc6d9b21ad7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -966,7 +967,24 @@ MonoBehaviour:
   currentEnemyState: 0
   maxHealth: 5
   moveSpeed: 2
-  easing: 0.8
+  easing: 0.2
+  minMaxRandomWait: {x: 0.1, y: 3}
+--- !u!58 &824957330
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824957326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &849118221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,8 +1122,8 @@ MonoBehaviour:
   attackKey: 323
   attackDamage: 1
   meleeAttackDistance: 2
-  meleeAttackRadius: 1
-  attackDelay: 0.5
+  meleeAttackRadius: 0.6
+  attackDelay: 0.4
   attackIndicator: {fileID: 181456879}
   hitLayers:
     serializedVersion: 2
@@ -1160,7 +1178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4dc249f65ffc74ebd344e9a95bc3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 6
   healthIconRenderer: {fileID: 2104342565}
   healthIconPrefab: {fileID: 3344618144512170453, guid: 967ede273d7c56d428197c5aad8e4e9d, type: 3}
   OnPlayerDamaged:
@@ -1486,7 +1504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogCanvas: {fileID: 1602735317}
-  textSpeedMultiplier: 3
   startOnLoad: 1
   preDialogDelay: 1
   dialog:
@@ -1549,7 +1566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogCanvas: {fileID: 1602735317}
-  textSpeedMultiplier: 3
   startOnLoad: 0
   preDialogDelay: 1
   dialog:
@@ -1577,7 +1593,19 @@ MonoBehaviour:
       m_Calls: []
   OnDialogFinished:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1397012197}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1439300532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,7 +1988,7 @@ GameObject:
   - component: {fileID: 1610036856}
   - component: {fileID: 1610036855}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Dialog Line Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,8 +2036,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialog lines....
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c5ccb9cf51590834690eb58299f0208a, type: 2}
-  m_sharedMaterial: {fileID: -5944879298775059168, guid: c5ccb9cf51590834690eb58299f0208a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d85a9e911e172b54e8bf13e61d9e8bdc, type: 2}
+  m_sharedMaterial: {fileID: 7716717694653937370, guid: d85a9e911e172b54e8bf13e61d9e8bdc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2069,7 +2097,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 2.0904844, y: 0, z: -2.0904846, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

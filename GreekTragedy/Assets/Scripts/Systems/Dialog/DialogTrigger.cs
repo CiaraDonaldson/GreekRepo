@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,8 +23,6 @@ public sealed class DialogLine
 public sealed class DialogTrigger : MonoBehaviour
 {
     [SerializeField] Canvas dialogCanvas;
-    [Tooltip("For speeding up or slowing base text speed.")]
-    public float textSpeedMultiplier = 1;
     [SerializeField] bool startOnLoad;
     [SerializeField, Tooltip("Delay before dialog begins, in Seconds")]
     float preDialogDelay = 1;
@@ -35,7 +34,7 @@ public sealed class DialogTrigger : MonoBehaviour
     [SerializeField] float timeBetweenDialogLines;
     [SerializeField] UnityEvent OnDialogStarted;
     [SerializeField] UnityEvent OnDialogFinished;
-    Queue<DialogLine> _currentLines = new();
+    readonly Queue<DialogLine> _currentLines = new();
     bool _hasStarted = false;
 
     private void Start()
@@ -58,6 +57,7 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
         if (_hasStarted) yield return null;
+        Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(preDialogDelay);
         _hasStarted = true;
         if (dialogCanvas != null)
@@ -80,7 +80,7 @@ public sealed class DialogTrigger : MonoBehaviour
 
             foreach (var character in dialog.line)
             {
-                yield return new WaitForSecondsRealtime(textSpeed * textSpeedMultiplier);
+                yield return new WaitForSecondsRealtime(textSpeed);
                 talkerDialogTMPText.text += character;
             }
 
@@ -96,6 +96,7 @@ public sealed class DialogTrigger : MonoBehaviour
         {
             _hasStarted = false;
             OnDialogFinished.Invoke();
+            Time.timeScale = 1;
         }
     }
 }
