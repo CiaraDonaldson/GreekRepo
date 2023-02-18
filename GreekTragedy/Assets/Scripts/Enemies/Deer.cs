@@ -11,7 +11,7 @@ public sealed class Deer : Enemy
     }
 
     public DeerState currentState;
-    public float easing;
+    [Range(0f, .2f)] public float moveRate;
     public Vector2 minMaxRandomWait;
     Vector2 targetLocation;
     bool isGettingNewTargetLocation;
@@ -33,7 +33,7 @@ public sealed class Deer : Enemy
         switch (currentState)
         {
             case DeerState.Moving:
-                transform.position = Vector2.MoveTowards((Vector2)transform.position, targetLocation, easing);
+                transform.position = Vector2.MoveTowards((Vector2)transform.position, targetLocation, moveRate);
                 if ((Vector2)transform.position == targetLocation)
                 {
                     if (!isGettingNewTargetLocation)
@@ -48,6 +48,11 @@ public sealed class Deer : Enemy
             case DeerState.Fleeing:
                 break;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
     }
 
     void SetTargetLocation()

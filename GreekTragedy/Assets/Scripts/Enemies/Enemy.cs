@@ -5,17 +5,15 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 {
     public static event Action<GameObject> OnEnemyDamaged;
     public static event Action<GameObject> OnEnemyDied;
-    public int maxHealth;
+    public GameObject CurrentTarget;
+    public int MaxHealth;
     private float _currentHealth;
 
-    void OnEnable() => _currentHealth = maxHealth;
+    void OnEnable() => _currentHealth = MaxHealth;
 
     public void ApplyDamage(int amount)
     {
-        _currentHealth -= amount;
-        if (_currentHealth < 0) 
-            _currentHealth = 0;
-        print($"Enemy Damaged: {gameObject.name} for {amount} points of health!");
+        _currentHealth = _currentHealth - amount <= 0 ? 0 : _currentHealth -= amount;
         OnEnemyDamaged?.Invoke(gameObject);
         if (_currentHealth != 0) return;
         OnEnemyDied?.Invoke(gameObject);

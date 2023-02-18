@@ -11,7 +11,10 @@ public sealed class CreateObject : MonoBehaviour
     [SerializeField] private GameObject objectToSpawn;
     private Vector3 originalScale;
 
-    private void Start() => originalScale = objectToSpawn.transform.localScale;
+    private void Start()
+    {
+        originalScale = objectToSpawn.transform.localScale;
+    }
 
     public void CreateNewObject(GameObject objLoc)
     {

@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentState: 0
-  easing: 0.1
+  easing: 0.12
   minMaxRandomWait: {x: 0.1, y: 3}
 --- !u!212 &708913429
 SpriteRenderer:
@@ -1161,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &737510462
 Transform:
   m_ObjectHideFlags: 0
@@ -1479,7 +1479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentState: 0
-  easing: 0.1
+  easing: 0.12
   minMaxRandomWait: {x: 0.1, y: 3}
 --- !u!58 &824957330
 CircleCollider2D:
@@ -1610,7 +1610,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eeafe255476a3c64f939778326bec29e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1635,7 +1635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackKey: 323
   attackDamage: 1
-  meleeAttackDistance: 2
+  meleeAttackDistance: 1.5
   meleeAttackRadius: 1
   attackDelay: 0.4
   attackIndicator: {fileID: 181456879}
@@ -1716,6 +1716,33 @@ MonoBehaviour:
   roomSize: {x: 22, y: 12}
   playerOffset: {x: 0.5, y: 1}
   dashIndicator: {fileID: 1322265597}
+  OnDashActivated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1313347168}
+        m_TargetAssemblyTypeName: CreateObject, Assembly-CSharp
+        m_MethodName: CreateNewObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1313347169}
+        m_TargetAssemblyTypeName: AudioFX, Assembly-CSharp
+        m_MethodName: PlayFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!70 &861891933
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1956,6 +1983,7 @@ Transform:
   m_Children:
   - {fileID: 300746045}
   - {fileID: 1146387116}
+  - {fileID: 1313347167}
   m_Father: {fileID: 861891929}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2343,6 +2371,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307341548}
   m_CullTransparentMesh: 1
+--- !u!1 &1313347166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1313347167}
+  - component: {fileID: 1313347168}
+  - component: {fileID: 1313347169}
+  m_Layer: 7
+  m_Name: DashFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1313347167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313347166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1023537509}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1313347168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313347166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777aad2160c45244a2830bb0c88d83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 1
+  minMaxScaleMultiplier: {x: 1, y: 1}
+  minMaxAmountToSpawn: {x: 1, y: 1}
+  offset: {x: 0, y: 0}
+  randomizeOffset: 0
+  randomizeOffsetSize: 1
+  objectToSpawn: {fileID: 4652114902403967211, guid: 1f61543b4311b294c9cfc82ad5970257, type: 3}
+--- !u!114 &1313347169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313347166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f775d2f9058f944857b4f0bc802586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayType: 0
+  useSource: 1
+  playClipAtPoint: 0
+  source: {fileID: 625520800}
+  clips: []
+  minMaxVolume: {x: 0.4, y: 0.6}
+  minMaxPitch: {x: 0.8, y: 1.2}
 --- !u!1 &1322265595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,7 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
