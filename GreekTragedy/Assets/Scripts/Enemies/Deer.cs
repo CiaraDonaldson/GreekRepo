@@ -15,6 +15,12 @@ public sealed class Deer : Enemy
     public Vector2 minMaxRandomWait;
     Vector2 targetLocation;
     bool isGettingNewTargetLocation;
+    SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {

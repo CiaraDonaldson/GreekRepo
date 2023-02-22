@@ -15,6 +15,9 @@ public sealed class DialogLine
     public string speaker;
     public string line;
     public Sprite image;
+    public bool waitForContinueButton = true;
+    public float textSpeed = .2f;
+    public int delayAfterLine = 1;
 }
 
 /// <summary>
@@ -31,8 +34,6 @@ public sealed class DialogTrigger : MonoBehaviour
     [SerializeField] TMP_Text talkerDialogTMPText;
     [SerializeField] TMP_Text continueDialogText;
     [SerializeField] Image targetImage;
-    [SerializeField] float textSpeed;
-    [SerializeField] float timeBetweenDialogLines;
     [SerializeField] KeyCode continueDialogKey = KeyCode.Space;
     [SerializeField] UnityEvent OnDialogStarted;
     [SerializeField] UnityEvent OnDialogFinished;
@@ -57,6 +58,9 @@ public sealed class DialogTrigger : MonoBehaviour
         _continueKeyPressed = true;
     }
 
+    private void OnDisable() => StopAllCoroutines();
+    
+
     [ContextMenu(nameof(Trigger))]
     /// <summary>
     /// Public call to trigger dialog line if called from another source
@@ -74,13 +78,14 @@ public sealed class DialogTrigger : MonoBehaviour
         if (dialogCanvas != null)
             dialogCanvas.gameObject.SetActive(true);
         OnDialogStarted.Invoke();
+        bool continueDialog = false;
         if (_currentLines.TryPeek(out DialogLine dialog))
         {
             if (dialog == null) yield return null;
             if (dialog.speaker == string.Empty) yield return null;
             talkerNameTMPText.text = dialog.speaker;
             talkerDialogTMPText.text = string.Empty;
-
+            continueDialog = dialog.waitForContinueButton;
             if (targetImage != null && dialog.image != null)
             {
                 targetImage.sprite = dialog.image;
@@ -88,19 +93,22 @@ public sealed class DialogTrigger : MonoBehaviour
             }
             else
                 targetImage.color = new Color(1, 1, 1, 0);
-
-            foreach (var character in dialog.line)
+            string line = dialog.line;
+            foreach (var character in line)
             {
-                yield return new WaitForSecondsRealtime(textSpeed);
+                yield return new WaitForSecondsRealtime(dialog.textSpeed);
                 talkerDialogTMPText.text += character;
             }
 
-            yield return new WaitForSecondsRealtime(timeBetweenDialogLines);
+            yield return new WaitForSecondsRealtime(dialog.delayAfterLine);
             _currentLines.Dequeue();
         }
         continueDialogText.gameObject.SetActive(true);
-        yield return new WaitUntil(() => _continueKeyPressed);
-        _continueKeyPressed = false;
+        if (continueDialog)
+        {
+            yield return new WaitUntil(() => _continueKeyPressed);
+            _continueKeyPressed = false;
+        }
         if (_currentLines.Count != 0)
         {
             _hasStarted = false;
