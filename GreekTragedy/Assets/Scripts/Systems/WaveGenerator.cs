@@ -18,12 +18,13 @@ public class WaveGenerator : MonoBehaviour
     [SerializeField] UnityEvent OnFinishedAllWaves;
     readonly List<GameObject> _currentEnemies = new();
     bool _finishedSpawning = false;
+    bool hasStarted;
 
     private void Update()
     {
-        if (_finishedSpawning & _currentEnemies.Count == 0)
+        if (!hasStarted & _finishedSpawning & _currentEnemies.Count == 0)
         {
-            print($"Done with current wave");
+            hasStarted = true;
             OnClearedCurrentWave?.Invoke();
         }
     }
@@ -65,6 +66,7 @@ public class WaveGenerator : MonoBehaviour
         enemiesPerWaveAdds += enemiesPerWaveAdds;
         CurrentWave++;
         _finishedSpawning = true;
+        hasStarted = false;
     }
 
     void RemoveEnemyFromList(GameObject obj) => _currentEnemies.Remove(obj);

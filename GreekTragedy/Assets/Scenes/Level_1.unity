@@ -2003,7 +2003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1156624904
 Transform:
   m_ObjectHideFlags: 0
@@ -2046,7 +2046,7 @@ MonoBehaviour:
     line: We know, child. The corruption has taken hold of Mount Olympus and the
       gods who reside there, but luckily with the help of old magic we trapped them
       there.
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
@@ -2062,7 +2062,7 @@ MonoBehaviour:
       gods that were able to escape us while we were casting the entrapment spell,
       then once you\u2019ve beaten them you must find the source of the corruption
       and dispel it."
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
@@ -2076,25 +2076,25 @@ MonoBehaviour:
   - speaker: The Three Fates
     line: Impossible, this corruption has made them violent and confrontational.
       Once you beat them only then will they be able to see reason.
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: The Three Fates
     line: 'Take this sword and use the ''Left Mouse'' to destroy your enemies! '
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: The Three Fates
     line: Also, don't forgot to use your dash ability with the 'Left Shift' button!
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
     line: "Very well, I\u2019ll be off then."
-    image: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+    image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
@@ -2124,6 +2124,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1593934905}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1409113266}
+        m_TargetAssemblyTypeName: WaveGenerator, Assembly-CSharp
+        m_MethodName: StartSpawningWaves
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2599,8 +2611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWaves: 10
-  enemiesPerWave: 0
-  enemiesPerWaveAdds: 10
+  enemiesPerWaveStatic: 0
+  enemiesPerWaveAdds: 2
   timeBetweenSpawns: 3
   enemies:
   - {fileID: 4232883471416590900, guid: 0d151a2f70789454aa87c22fc0d42074, type: 3}
@@ -2612,7 +2624,19 @@ MonoBehaviour:
       m_Calls: []
   OnClearedCurrentWave:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1409113266}
+        m_TargetAssemblyTypeName: WaveGenerator, Assembly-CSharp
+        m_MethodName: StartSpawningWaves
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFinishedAllWaves:
     m_PersistentCalls:
       m_Calls: []
