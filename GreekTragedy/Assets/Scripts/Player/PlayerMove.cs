@@ -1,4 +1,5 @@
 using darcproducts;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Vector2 playerOffset;
     [SerializeField] Image dashIndicator;
     [SerializeField] UnityEvent<Vector3> OnDashActivated;
+    [SerializeField] UnityEvent<Vector3> OnDashDeactivated;
     Vector2 _moveDirection;
 
 
@@ -34,8 +36,8 @@ public class PlayerMove : MonoBehaviour
         {
             _currentTime = 0;
             newPos += _moveDirection * dashDistance;
-            Vector3 halfPos = (transform.position + (Vector3)newPos) * .5f;
-            OnDashActivated?.Invoke(halfPos);
+            //Vector3 halfPos = (transform.position + (Vector3)newPos) * .5f;
+            OnDashActivated?.Invoke(newPos);
         }
         transform.position = newPos;
     }

@@ -59,13 +59,17 @@ public sealed class DialogTrigger : MonoBehaviour
     }
 
     private void OnDisable() => StopAllCoroutines();
-    
+
 
     [ContextMenu(nameof(Trigger))]
     /// <summary>
     /// Public call to trigger dialog line if called from another source
     /// </summary>
-    public void Trigger() => StartCoroutine(TriggerDialog());
+    public void Trigger()
+    {
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(TriggerDialog());
+    }
 
     IEnumerator TriggerDialog()
     {
