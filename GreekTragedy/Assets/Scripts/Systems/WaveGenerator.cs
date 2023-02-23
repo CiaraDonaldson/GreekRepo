@@ -7,29 +7,39 @@ public class WaveGenerator : MonoBehaviour
 {
     public static int CurrentWave = 1;
     [SerializeField] int maxWaves;
-    [SerializeField] int enemiesPerWave;
+    [SerializeField, Tooltip("Every wave has this static amount plus Adds if any")] int enemiesPerWaveStatic;
     [SerializeField, Tooltip("Every wave this adds to itself and then adds to enemy count, leave 0 for no effect")] 
-    int enemiesPerWaveAdd;
+    int enemiesPerWaveAdds;
     [SerializeField] float timeBetweenSpawns;
-    [SerializeField] float timeBetweenWaves;
     [SerializeField] GameObject[] enemies;
     [SerializeField] UnityEvent OnStartedWave;
     [SerializeField] UnityEvent<GameObject> OnEnemySpawned;
-    [SerializeField] UnityEvent OnFinishedWave;
-    List<GameObject> _currentEnemies = new();
-    bool _startedSpawning = false;
+    [SerializeField] UnityEvent OnClearedCurrentWave;
+    [SerializeField] UnityEvent OnFinishedAllWaves;
+    readonly List<GameObject> _currentEnemies = new();
+    bool _finishedSpawning = false;
 
     private void Update()
     {
-        if (_currentEnemies.Count == 0 && _startedSpawning)
+        if (_finishedSpawning & _currentEnemies.Count == 0)
         {
-            _startedSpawning = false;
-            OnFinishedWave.Invoke();
+            print($"Done with current wave");
+            OnClearedCurrentWave?.Invoke();
         }
     }
 
-    private void OnDisable() => StopAllCoroutines();
+    private void OnEnable()
+    {
+        Enemy.OnEnemyDied += RemoveEnemyFromList;
+    }
 
+    private void OnDisable()
+    {
+        Enemy.OnEnemyDied -= RemoveEnemyFromList;
+        StopAllCoroutines();
+    }
+
+    [ContextMenu(nameof(SpawnWave))]
     public void StartSpawningWaves()
     {
         OnStartedWave.Invoke();
@@ -38,10 +48,13 @@ public class WaveGenerator : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        _currentEnemies.Clear();
-        _startedSpawning = true;
-        int totalToSpawn = enemiesPerWave + enemiesPerWaveAdd;
-        for (int i = 0; i < enemiesPerWave; i++)
+        if (CurrentWave == maxWaves)
+        {
+            OnFinishedAllWaves?.Invoke();
+            yield return null;
+        }
+        int totalToSpawn = enemiesPerWaveStatic + enemiesPerWaveAdds;
+        for (int i = 0; i < totalToSpawn; i++)
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
             Vector2 newPos = new Vector2(Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
@@ -49,12 +62,10 @@ public class WaveGenerator : MonoBehaviour
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);
         }
-        enemiesPerWaveAdd += enemiesPerWaveAdd;
+        enemiesPerWaveAdds += enemiesPerWaveAdds;
         CurrentWave++;
-        if (CurrentWave < maxWaves)
-        {
-            yield return new WaitForSecondsRealtime(timeBetweenWaves);
-            StartCoroutine(SpawnWave());
-        }
+        _finishedSpawning = true;
     }
+
+    void RemoveEnemyFromList(GameObject obj) => _currentEnemies.Remove(obj);
 }
