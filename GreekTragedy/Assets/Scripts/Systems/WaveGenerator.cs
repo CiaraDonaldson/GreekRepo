@@ -12,6 +12,7 @@ public class WaveGenerator : MonoBehaviour
     int enemiesPerWaveAdds;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] GameObject[] enemies;
+    [SerializeField] Transform enemiesParent;
     [SerializeField] UnityEvent OnStartedWave;
     [SerializeField] UnityEvent<GameObject> OnEnemySpawned;
     [SerializeField] UnityEvent OnClearedCurrentWave;
@@ -59,7 +60,7 @@ public class WaveGenerator : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
             Vector2 newPos = new Vector2(Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
-            GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity);
+            GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity, enemiesParent);
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);
         }
