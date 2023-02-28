@@ -8,22 +8,22 @@ public sealed class GlobalBool : ScriptableObject
     public bool broadcast;
     public bool resetOnDisable;
     public bool resetValue;
-    bool _value;
+    [SerializeField] bool _currentValue;
 
     public bool Value
     {
-        get => _value;
+        get => _currentValue;
         set
         {
-            _value = value;
+            _currentValue = value;
             if (broadcast)
-                OnValueChanged?.Invoke(_value);
+                OnValueChanged?.Invoke(_currentValue);
         }
     }
 
     private void OnDisable()
     {
         if (resetOnDisable)
-            _value = resetValue;
+            _currentValue = resetValue;
     }
 }

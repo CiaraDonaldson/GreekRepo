@@ -15,7 +15,8 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] LayerMask hitLayers;
     [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
     [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
-    bool canAttack = true;
+    bool attackAvailable = true;
+    bool isActive;
     float _attackTime;
     Vector2 _attackPosition;
     Camera _cam;
@@ -31,10 +32,12 @@ public class PlayerMeleeCombat : MonoBehaviour
         _cam = Camera.main;
     }
 
+    public void SetAbleToAttack(bool newValue) => isActive = newValue;
+
     IEnumerator ResetAttack()
     {
         yield return new WaitForSecondsRealtime(attackDelay);
-        canAttack = true;
+        attackAvailable = true;
     }
 
     void Update()
@@ -49,23 +52,21 @@ public class PlayerMeleeCombat : MonoBehaviour
 
     void AttacKTargets()
     {
-        if (canAttack)
+        if (!isActive) return;
+        if (attackAvailable)
         {
-            canAttack = false;
+            attackAvailable = false;
             _attackTime = 0;
-            Collider2D[] hitTargets = Physics2D.OverlapCircleAll(_attackPosition, meleeAttackRadius, hitLayers);
-            if (hitTargets.Length == 0)
+            Collider2D hitTarget = Physics2D.OverlapCircle(_attackPosition, meleeAttackRadius, hitLayers);
+            if (hitTarget == null)
             {
                 OnAttackMissed?.Invoke(_attackPosition);
                 StartCoroutine(ResetAttack());
                 return;
             }
-            foreach (var t in hitTargets)
-            {
-                if (t.TryGetComponent(out IDamagable success))
-                    success.ApplyDamage(attackDamage);
-            }
-            OnAttackHit?.Invoke(hitTargets[0].gameObject);
+            if (hitTarget.TryGetComponent(out IDamagable success))
+                success.ApplyDamage(attackDamage);
+            OnAttackHit?.Invoke(hitTarget.gameObject);
             StartCoroutine(ResetAttack());
         }
     }
@@ -73,7 +74,7 @@ public class PlayerMeleeCombat : MonoBehaviour
 
     private void OnDrawGizmos() // for visualizing location in scene vew during play
     {
-        if (!canAttack) return;
+        if (!attackAvailable) return;
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(_attackPosition, meleeAttackRadius);
     }

@@ -5,7 +5,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 {
     public static event Action<GameObject> OnEnemyDamaged;
     public static event Action<GameObject> OnEnemyDied;
-    public GameObject CurrentTarget;
     public int MaxHealth;
     private float _currentHealth;
 

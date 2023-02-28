@@ -10,14 +10,11 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     List<GameObject> healthIcons = new();
     [SerializeField] UnityEvent<int> OnPlayerDamaged;
     [SerializeField] UnityEvent<GameObject> OnPlayerDied;
+    [SerializeField] float delayedDiedEventTime;
+    [SerializeField] UnityEvent<GameObject> OnPlayerDiedDelayed;
     private int _currentHealth;
 
-    void Start()
-    {
-        _currentHealth = maxHealth;
-        for (int i = 0; i < maxHealth; i++)
-            healthIcons.Add(Instantiate(healthIconPrefab, healthIconRenderer.transform));
-    }
+    void Start() => ResetHealth();
 
     /// <summary>
     /// Applies damage to enemy targets
@@ -25,13 +22,22 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     /// <param name="amount">Amount of damage you want to inflict</param>
     public void ApplyDamage(int amount)
     {
-        _currentHealth = _currentHealth -= amount < 0 ? 0 : _currentHealth -= amount;
+        _currentHealth -= amount;
+        _currentHealth = _currentHealth < 0 ? 0 : _currentHealth;
         OnPlayerDamaged?.Invoke(amount);
         if (_currentHealth == 0)
         {
             OnPlayerDied?.Invoke(gameObject);
+            Invoke(nameof(SendDelayedDiedEvent), delayedDiedEventTime);
             gameObject.SetActive(false);
         }
+    }
+
+    public void ResetHealth()
+    {
+        _currentHealth = maxHealth;
+        for (int i = 0; i < maxHealth; i++)
+            healthIcons.Add(Instantiate(healthIconPrefab, healthIconRenderer.transform));
     }
 
     /// <summary>
@@ -40,8 +46,10 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     public void RemoveHealthIcon()
     {
         if (healthIcons.Count == 0) return;
-        GameObject icon = healthIcons[healthIcons.Count - 1];
+        GameObject icon = healthIcons[^1];
         healthIcons.Remove(icon);
         DestroyImmediate(icon);
     }
+
+    void SendDelayedDiedEvent() => OnPlayerDiedDelayed?.Invoke(gameObject);
 }

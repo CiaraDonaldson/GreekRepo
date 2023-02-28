@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,6 +24,7 @@ public sealed class DialogLine
 /// </summary>
 public sealed class DialogTrigger : MonoBehaviour
 {
+    [SerializeField] GlobalBool HasSeenAlready;
     [SerializeField] Canvas dialogCanvas;
     [SerializeField] bool startOnLoad;
     [SerializeField, Tooltip("Delay before dialog begins, in Seconds")]
@@ -41,11 +41,16 @@ public sealed class DialogTrigger : MonoBehaviour
     bool _continueKeyPressed;
     bool _hasStarted = false;
 
-    private void Start()
+    private void OnEnable()
     {
-        continueDialogText.text = $"Press '{continueDialogKey}' to continue...";
         if (dialogCanvas != null)
             dialogCanvas.gameObject.SetActive(false);
+        InitializeDialogTrigger();
+    }
+
+    void InitializeDialogTrigger()
+    {
+        continueDialogText.text = $"Press '{continueDialogKey}' to continue...";
         foreach (var l in dialog)
             _currentLines.Enqueue(l);
         if (startOnLoad)
@@ -67,62 +72,64 @@ public sealed class DialogTrigger : MonoBehaviour
     /// </summary>
     public void Trigger()
     {
-        if (gameObject.activeInHierarchy)
-            StartCoroutine(TriggerDialog());
+        StartCoroutine(TriggerDialog());
     }
 
     IEnumerator TriggerDialog()
     {
-        if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
-        if (_hasStarted) yield return null;
-        continueDialogText.gameObject.SetActive(false);
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(preDialogDelay);
-        _hasStarted = true;
-        if (dialogCanvas != null)
-            dialogCanvas.gameObject.SetActive(true);
-        OnDialogStarted.Invoke();
-        bool continueDialog = false;
-        if (_currentLines.TryPeek(out DialogLine dialog))
+        if (!HasSeenAlready.Value)
         {
-            if (dialog == null) yield return null;
-            if (dialog.speaker == string.Empty) yield return null;
-            talkerNameTMPText.text = dialog.speaker;
-            talkerDialogTMPText.text = string.Empty;
-            continueDialog = dialog.waitForContinueButton;
-            if (targetImage != null && dialog.image != null)
+            if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
+            if (_hasStarted) yield return null;
+            continueDialogText.gameObject.SetActive(false);
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(preDialogDelay);
+            _hasStarted = true;
+            if (dialogCanvas != null)
+                dialogCanvas.gameObject.SetActive(true);
+            OnDialogStarted.Invoke();
+            bool continueDialog = false;
+            if (_currentLines.TryPeek(out DialogLine dialog))
             {
-                targetImage.sprite = dialog.image;
-                targetImage.color = new Color(1, 1, 1, 1);
-            }
-            else
-                targetImage.color = new Color(1, 1, 1, 0);
-            string line = dialog.line;
-            foreach (var character in line)
-            {
-                yield return new WaitForSecondsRealtime(dialog.textSpeed);
-                talkerDialogTMPText.text += character;
-            }
+                if (dialog == null) yield return null;
+                if (dialog.speaker == string.Empty) yield return null;
+                talkerNameTMPText.text = dialog.speaker;
+                talkerDialogTMPText.text = string.Empty;
+                continueDialog = dialog.waitForContinueButton;
+                if (targetImage != null && dialog.image != null)
+                {
+                    targetImage.sprite = dialog.image;
+                    targetImage.color = new Color(1, 1, 1, 1);
+                }
+                else
+                    targetImage.color = new Color(1, 1, 1, 0);
+                string line = dialog.line;
+                foreach (var character in line)
+                {
+                    yield return new WaitForSecondsRealtime(dialog.textSpeed);
+                    talkerDialogTMPText.text += character;
+                }
 
-            yield return new WaitForSecondsRealtime(dialog.delayAfterLine);
-            _currentLines.Dequeue();
+                yield return new WaitForSecondsRealtime(dialog.delayAfterLine);
+                _currentLines.Dequeue();
+            }
+            continueDialogText.gameObject.SetActive(true);
+            if (continueDialog)
+            {
+                yield return new WaitUntil(() => _continueKeyPressed);
+                _continueKeyPressed = false;
+            }
+            if (_currentLines.Count != 0)
+            {
+                _hasStarted = false;
+                Trigger();
+                HasSeenAlready.Value = true;
+                yield return null;
+            }
         }
-        continueDialogText.gameObject.SetActive(true);
-        if (continueDialog)
-        {
-            yield return new WaitUntil(() => _continueKeyPressed);
-            _continueKeyPressed = false;
-        }
-        if (_currentLines.Count != 0)
-        {
-            _hasStarted = false;
-            Trigger();
-        }
-        else
-        {
-            _hasStarted = false;
-            OnDialogFinished.Invoke();
-            Time.timeScale = 1;
-        }
+        _hasStarted = false;
+        HasSeenAlready.Value = true;
+        OnDialogFinished.Invoke();
+        Time.timeScale = 1;
     }
 }

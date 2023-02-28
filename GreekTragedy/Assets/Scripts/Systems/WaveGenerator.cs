@@ -8,7 +8,7 @@ public class WaveGenerator : MonoBehaviour
     public static int CurrentWave = 1;
     [SerializeField] int maxWaves;
     [SerializeField, Tooltip("Every wave has this static amount plus Adds if any")] int enemiesPerWaveStatic;
-    [SerializeField, Tooltip("Every wave this adds to itself and then adds to enemy count, leave 0 for no effect")] 
+    [SerializeField, Tooltip("Every wave this adds to itself and then adds to enemy count, leave 0 for no effect")]
     int enemiesPerWaveAdds;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] GameObject[] enemies;
@@ -71,4 +71,10 @@ public class WaveGenerator : MonoBehaviour
     }
 
     void RemoveEnemyFromList(GameObject obj) => _currentEnemies.Remove(obj);
+
+    public void RemoveAllCurrentEnemies()
+    {
+        foreach (var e in _currentEnemies)
+            Destroy(e);
+    }
 }

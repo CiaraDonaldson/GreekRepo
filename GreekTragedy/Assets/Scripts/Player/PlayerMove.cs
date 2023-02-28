@@ -1,5 +1,4 @@
 using darcproducts;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] KeyCode dashKey;
     [SerializeField] float dashDistance;
     [SerializeField] float dashResetTime;
+    [SerializeField] float knockbackDistance = .2f;
     float _currentTime;
     [SerializeField] Vector2 roomCenter;
     [SerializeField] Vector2 roomSize;
@@ -39,6 +39,12 @@ public class PlayerMove : MonoBehaviour
             //Vector3 halfPos = (transform.position + (Vector3)newPos) * .5f;
             OnDashActivated?.Invoke(newPos);
         }
+        transform.position = newPos;
+    }
+
+    public void KnockBack(Vector2 inVector)
+    {
+        Vector2 newPos = (Vector2)transform.position + inVector.normalized * knockbackDistance;
         transform.position = newPos;
     }
 
