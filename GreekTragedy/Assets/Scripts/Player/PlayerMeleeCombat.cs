@@ -27,10 +27,7 @@ public class PlayerMeleeCombat : MonoBehaviour
         private set { }
     }
 
-    void Start()
-    {
-        _cam = Camera.main;
-    }
+    void Start() => _cam = Camera.main;
 
     public void SetAbleToAttack(bool newValue) => isActive = newValue;
 
@@ -57,16 +54,19 @@ public class PlayerMeleeCombat : MonoBehaviour
         {
             attackAvailable = false;
             _attackTime = 0;
-            Collider2D hitTarget = Physics2D.OverlapCircle(_attackPosition, meleeAttackRadius, hitLayers);
-            if (hitTarget == null)
+            Collider2D[] hitTargets = Physics2D.OverlapCircleAll(_attackPosition, meleeAttackRadius, hitLayers);
+            if (hitTargets.Length == 0)
             {
                 OnAttackMissed?.Invoke(_attackPosition);
                 StartCoroutine(ResetAttack());
                 return;
             }
-            if (hitTarget.TryGetComponent(out IDamagable success))
-                success.ApplyDamage(attackDamage);
-            OnAttackHit?.Invoke(hitTarget.gameObject);
+            foreach (var t in hitTargets)
+            {
+                if (t.TryGetComponent(out IDamagable success))
+                    success.ApplyDamage(attackDamage);
+            }
+            OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
         }
     }

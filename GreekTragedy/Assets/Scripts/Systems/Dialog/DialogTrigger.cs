@@ -123,10 +123,17 @@ public sealed class DialogTrigger : MonoBehaviour
             {
                 _hasStarted = false;
                 Trigger();
-                HasSeenAlready.Value = true;
                 yield return null;
             }
+            else
+                FinishDialog();
         }
+        else
+            FinishDialog(); 
+    }
+
+    void FinishDialog()
+    {
         _hasStarted = false;
         HasSeenAlready.Value = true;
         OnDialogFinished.Invoke();
