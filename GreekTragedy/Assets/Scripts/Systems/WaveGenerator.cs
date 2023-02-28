@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class WaveGenerator : MonoBehaviour
 {
     public static int CurrentWave = 1;
+    [SerializeField] TMP_Text currentWaveText;
     [SerializeField] int maxWaves;
     [SerializeField, Tooltip("Every wave has this static amount plus Adds if any")] int enemiesPerWaveStatic;
     [SerializeField, Tooltip("Every wave this adds to itself and then adds to enemy count, leave 0 for no effect")]
@@ -13,7 +15,7 @@ public class WaveGenerator : MonoBehaviour
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] GameObject[] enemies;
     [SerializeField] Transform enemiesParent;
-    [SerializeField] UnityEvent OnStartedWave;
+    [SerializeField] UnityEvent OnStartedWaves;
     [SerializeField] UnityEvent<GameObject> OnEnemySpawned;
     [SerializeField] UnityEvent OnClearedCurrentWave;
     [SerializeField] UnityEvent OnFinishedAllWaves;
@@ -44,7 +46,7 @@ public class WaveGenerator : MonoBehaviour
     [ContextMenu(nameof(SpawnWave))]
     public void StartSpawningWaves()
     {
-        OnStartedWave.Invoke();
+        OnStartedWaves.Invoke();
         StartCoroutine(SpawnWave());
     }
 
@@ -55,11 +57,12 @@ public class WaveGenerator : MonoBehaviour
             OnFinishedAllWaves?.Invoke();
             yield return null;
         }
+        currentWaveText.text = $"Wave: {CurrentWave}";
         int totalToSpawn = enemiesPerWaveStatic + enemiesPerWaveAdds;
         for (int i = 0; i < totalToSpawn; i++)
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
-            Vector2 newPos = new Vector2(Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
+            Vector2 newPos = new (Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
             GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity, enemiesParent);
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);
@@ -77,4 +80,6 @@ public class WaveGenerator : MonoBehaviour
         foreach (var e in _currentEnemies)
             Destroy(e);
     }
+
+    public void StopSpawningWave() => StopCoroutine(SpawnWave());
 }

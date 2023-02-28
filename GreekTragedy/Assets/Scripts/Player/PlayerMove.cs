@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Vector2 playerOffset;
     [SerializeField] Image dashIndicator;
     [SerializeField] UnityEvent<Vector3> OnDashActivated;
-    [SerializeField] UnityEvent<Vector3> OnDashDeactivated;
     Vector2 _moveDirection;
 
 
