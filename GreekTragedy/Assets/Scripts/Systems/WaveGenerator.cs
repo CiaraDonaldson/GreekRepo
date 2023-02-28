@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class WaveGenerator : MonoBehaviour
 {
-    public static int CurrentWave = 1;
+    public static int CurrentWave = 0;
     [SerializeField] TMP_Text currentWaveText;
     [SerializeField] int maxWaves;
     [SerializeField, Tooltip("Every wave has this static amount plus Adds if any")] int enemiesPerWaveStatic;
@@ -34,6 +34,7 @@ public class WaveGenerator : MonoBehaviour
 
     private void OnEnable()
     {
+        CurrentWave = 0;
         Enemy.OnEnemyDied += RemoveEnemyFromList;
     }
 
@@ -55,9 +56,9 @@ public class WaveGenerator : MonoBehaviour
         if (CurrentWave == maxWaves)
         {
             OnFinishedAllWaves?.Invoke();
-            yield return null;
+            yield break;
         }
-        currentWaveText.text = $"Wave: {CurrentWave}";
+        currentWaveText.text = $"Waves Left: {Mathf.Abs(maxWaves - CurrentWave - 1)}";
         int totalToSpawn = enemiesPerWaveStatic + enemiesPerWaveAdds;
         for (int i = 0; i < totalToSpawn; i++)
         {

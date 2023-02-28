@@ -1735,7 +1735,7 @@ MonoBehaviour:
   attackDamage: 1
   meleeAttackDistance: 1
   meleeAttackRadius: 1
-  attackDelay: 0.2
+  attackDelay: 0.4
   attackIndicator: {fileID: 181456879}
   hitLayers:
     serializedVersion: 2
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 0}
+  HasSeenAlready: {fileID: 11400000, guid: 66d24a0230c100841a787801ce9e6e83, type: 2}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1
@@ -3252,7 +3252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaveText: {fileID: 120065551}
-  maxWaves: 10
+  maxWaves: 6
   enemiesPerWaveStatic: 0
   enemiesPerWaveAdds: 1
   timeBetweenSpawns: 0.4
@@ -3295,6 +3295,18 @@ MonoBehaviour:
   OnFinishedAllWaves:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 120065549}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1494614176}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3394,7 +3406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 0}
+  HasSeenAlready: {fileID: 11400000, guid: ce241f2f3735f3743a8b4629b4162590, type: 2}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1
@@ -3403,19 +3415,19 @@ MonoBehaviour:
     line: How dare you destroy my lovely beasts!
     image: {fileID: 21300000, guid: 55dcb21361b44694bb93ccd7ec938954, type: 3}
     waitForContinueButton: 1
-    textSpeed: 0.2
+    textSpeed: 0.1
     delayAfterLine: 1
   - speaker: Hermes
     line: Artemis! You need to stop this!
-    image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
+    image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
-    textSpeed: 0.2
+    textSpeed: 0.1
     delayAfterLine: 1
   - speaker: Currupted Artemis
     line: Fool! You will be destroyed!
     image: {fileID: 21300000, guid: 55dcb21361b44694bb93ccd7ec938954, type: 3}
     waitForContinueButton: 1
-    textSpeed: 0.4
+    textSpeed: 0.2
     delayAfterLine: 1
   talkerNameTMPText: {fileID: 489208502}
   talkerDialogTMPText: {fileID: 1610036855}
@@ -4237,7 +4249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1646881596
 RectTransform:
   m_ObjectHideFlags: 0
