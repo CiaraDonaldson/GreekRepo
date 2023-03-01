@@ -13,6 +13,7 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] float attackDelay; // to prevent spamming
     [SerializeField] Image attackIndicator;
     [SerializeField] LayerMask hitLayers;
+    [SerializeField] GameObject aimCursor;
     [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
     [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
     bool attackAvailable = true;
@@ -43,6 +44,7 @@ public class PlayerMeleeCombat : MonoBehaviour
         _attackTime = _attackTime > attackDelay ? attackDelay : _attackTime += Time.deltaTime;
         attackIndicator.fillAmount = Utilities.Remap(_attackTime, 0, attackDelay, 0, 1);
         _attackPosition = (Vector2)transform.position + (mousePos - (Vector2)transform.position).normalized * meleeAttackDistance;
+        aimCursor.transform.position = _attackPosition;
         if (Input.GetKeyDown(attackKey))
             AttacKTargets();
     }

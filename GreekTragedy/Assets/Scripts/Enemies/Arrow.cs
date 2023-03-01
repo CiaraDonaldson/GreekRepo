@@ -17,6 +17,8 @@ public class Arrow : MonoBehaviour
     {
         if (!Utilities.IsInLayerMask(collision.gameObject, hitLayers)) return;
         if (collision.TryGetComponent(out IDamagable damaged))
+        {
             damaged.ApplyDamage(damage);
+        }
     }
 }
