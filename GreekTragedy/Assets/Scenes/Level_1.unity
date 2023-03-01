@@ -1858,7 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4dc249f65ffc74ebd344e9a95bc3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   healthIconRenderer: {fileID: 2104342565}
   healthIconPrefab: {fileID: 3344618144512170453, guid: 967ede273d7c56d428197c5aad8e4e9d, type: 3}
   OnPlayerDamaged:
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 11400000, guid: 66d24a0230c100841a787801ce9e6e83, type: 2}
+  HasSeenAlready: {fileID: 11400000, guid: 2287ec4b83a60054d900ea75dac7d1c3, type: 2}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1
@@ -3406,7 +3406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 11400000, guid: ce241f2f3735f3743a8b4629b4162590, type: 2}
+  HasSeenAlready: {fileID: 11400000, guid: 2287ec4b83a60054d900ea75dac7d1c3, type: 2}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1

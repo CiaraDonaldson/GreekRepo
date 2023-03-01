@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f45a90c9acd3c5446ada6434345c1d35, type: 3}
-  m_Name: HasSeenBossStart
+  m_Name: ResetDialog
   m_EditorClassIdentifier: 
   broadcast: 0
-  resetOnDisable: 0
+  resetOnDisable: 1
   resetValue: 0
   _currentValue: 0
