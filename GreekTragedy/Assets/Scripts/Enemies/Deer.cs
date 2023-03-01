@@ -17,6 +17,7 @@ public sealed class Deer : Enemy
 
     private void OnEnable()
     {
+        CurrentHealth = MaxHealth;
         SetTargetLocation();
         _currentAttack = attackRate;
         _player = GameObject.FindWithTag("Player");

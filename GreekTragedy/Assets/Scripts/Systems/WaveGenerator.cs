@@ -82,5 +82,5 @@ public class WaveGenerator : MonoBehaviour
             Destroy(e);
     }
 
-    public void StopSpawningWave() => StopCoroutine(SpawnWave());
+    public void StopSpawningWave() => StopAllCoroutines();
 }

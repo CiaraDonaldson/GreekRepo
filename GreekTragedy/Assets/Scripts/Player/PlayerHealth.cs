@@ -48,7 +48,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
         if (healthIcons.Count == 0) return;
         GameObject icon = healthIcons[^1];
         healthIcons.Remove(icon);
-        DestroyImmediate(icon);
+        Destroy(icon);
     }
 
     void SendDelayedDiedEvent() => OnPlayerDiedDelayed?.Invoke(gameObject);

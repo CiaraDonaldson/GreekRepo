@@ -72,7 +72,7 @@ public class PlayerMeleeCombat : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos() // for visualizing location in scene vew during play
+    private void OnDrawGizmosSelected() // for visualizing location in scene vew during play
     {
         if (!attackAvailable) return;
         Gizmos.color = Color.red;
