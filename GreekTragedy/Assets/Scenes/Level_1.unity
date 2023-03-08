@@ -3091,25 +3091,22 @@ MonoBehaviour:
     textSpeed: 0.034
     delayAfterLine: 2
   - speaker: The Three Fates
-    line: We know, child. The corruption has taken hold of Mount Olympus and the
-      gods who reside there, but luckily with the help of old magic we trapped them
-      there.
+    line: We know, child. The corruption has taken hold of Mount Olympus. However,
+      with old magic, we managed to trap the majority of the gods there.
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: "oh\u2026Excellent then! What must we do next?"
+    line: "oh\u2026well alright then, I guess that\u2019s it."
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: The Three Fates
-    line: "Not so fast child, that would be the only good news you will hear from
-      us. For you have a long journey ahead of you, for you must confront the corrupted
-      gods that were able to escape us while we were casting the entrapment spell,
-      then once you\u2019ve beaten them you must find the source of the corruption
-      and dispel it."
+    line: Not so fast child, that would be the only good news you will hear from
+      us. For you see, you will have to face and defeat the corrupted gods that made
+      it out of our magic.
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
@@ -3141,7 +3138,7 @@ MonoBehaviour:
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: "Very well, I\u2019ll be off then."
+    line: "Very well then, I\u2019ll be off."
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
