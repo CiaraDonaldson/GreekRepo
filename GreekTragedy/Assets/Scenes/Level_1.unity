@@ -1901,12 +1901,12 @@ MonoBehaviour:
   attackKey: 323
   attackDamage: 1
   meleeAttackDistance: 1.2
-  meleeAttackRadius: 0.2
+  meleeAttackRadius: 0.6
   attackDelay: 0.4
   attackIndicator: {fileID: 181456879}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   aimCursor: {fileID: 66408813}
   OnAttackHit:
     m_PersistentCalls:
@@ -2557,24 +2557,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1602735313}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   currentState: 0
   healthBar: {fileID: 2114093622}
-  moveRate: 3.1
+  moveRate: 2.8
   arrowPrefab: {fileID: 7148367544027143770, guid: d9e756933a7a1864a8505e8df8627861, type: 3}
   numberOfShots: 3
-  arrowSpread: 3
+  arrowSpread: 5
   attackLocations:
   - {fileID: 800382246}
   - {fileID: 1104042754}
@@ -3078,7 +3066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 11400000, guid: 00dbd8219ea4a414bbcd6d1b35d07e8c, type: 2}
+  HasSeenAlready: {fileID: 0}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 1
   preDialogDelay: 0.2
@@ -3620,7 +3608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 11400000, guid: 2287ec4b83a60054d900ea75dac7d1c3, type: 2}
+  HasSeenAlready: {fileID: 0}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1
@@ -3720,7 +3708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaveText: {fileID: 120065551}
-  maxWaves: 5
+  maxWaves: 1
   enemiesPerWaveStatic: 0
   enemiesPerWaveAdds: 1
   timeBetweenSpawns: 0.4
@@ -3874,7 +3862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c76e26343db44b48b01007492edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasSeenAlready: {fileID: 11400000, guid: 2287ec4b83a60054d900ea75dac7d1c3, type: 2}
+  HasSeenAlready: {fileID: 0}
   dialogCanvas: {fileID: 1602735317}
   startOnLoad: 0
   preDialogDelay: 1

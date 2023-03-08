@@ -43,13 +43,12 @@ public class Artemis : Enemy
                     currentState = BossState.Attacking;
                 break;
             case BossState.Attacking:
-                hasSetLocation = false;
                 for (int i = 0; i < numberOfShots; ++i)
                 {
                     Arrow arrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity).GetComponent<Arrow>();
-                    Vector2 arrowDir = new(-targetLocation.x, -targetLocation.y > 0 ? -targetLocation.y + i * arrowSpread: -targetLocation.y - i * arrowSpread);
-                    arrow.direction = arrowDir;
+                    arrow.direction = new(-targetLocation.x, -targetLocation.y > 0 ? -targetLocation.y + i * arrowSpread : -targetLocation.y - i * arrowSpread);
                 }
+                hasSetLocation = false;
                 currentState = BossState.Moving;
                 break;
             case BossState.Enraged:

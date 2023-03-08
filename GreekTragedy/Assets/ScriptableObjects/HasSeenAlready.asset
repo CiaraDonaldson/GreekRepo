@@ -15,4 +15,4 @@ MonoBehaviour:
   broadcast: 0
   resetOnDisable: 0
   resetValue: 0
-  _currentValue: 0
+  _currentValue: 1

@@ -80,8 +80,8 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (!HasSeenAlready.Value)
         {
-            if (talkerDialogTMPText == null || talkerNameTMPText == null) yield return null;
-            if (_hasStarted) yield return null;
+            if (talkerDialogTMPText == null || talkerNameTMPText == null) yield break;
+            if (_hasStarted) yield break;
             continueDialogText.gameObject.SetActive(false);
             Time.timeScale = 0;
             yield return new WaitForSecondsRealtime(preDialogDelay);

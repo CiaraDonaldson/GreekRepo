@@ -67,6 +67,8 @@ public class PlayerMeleeCombat : MonoBehaviour
             {
                 if (t.TryGetComponent(out IDamagable success))
                     success.ApplyDamage(attackDamage);
+                if (t.TryGetComponent(out Arrow arrow))
+                    arrow.direction = -arrow.direction;
             }
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
