@@ -1,5 +1,6 @@
 using darcproducts;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Arrow : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Arrow : MonoBehaviour
     public Vector2 direction;
     public float speed;
     public LayerMask hitLayers;
+    [SerializeField] GameEvent OnArrowHit;
 
     private void Update()
     {
@@ -19,6 +21,8 @@ public class Arrow : MonoBehaviour
         if (collision.TryGetComponent(out IDamagable damaged))
         {
             damaged.ApplyDamage(damage);
+            OnArrowHit.Invoke(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

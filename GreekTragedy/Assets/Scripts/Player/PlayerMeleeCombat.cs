@@ -13,7 +13,9 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] float attackDelay; // to prevent spamming
     [SerializeField] Image attackIndicator;
     [SerializeField] LayerMask hitLayers;
+    [SerializeField] LayerMask bossLayer;
     [SerializeField] GameObject aimCursor;
+    [SerializeField] GameEvent OnDeflectedArrow;
     [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
     [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
     bool attackAvailable = true;
@@ -52,6 +54,7 @@ public class PlayerMeleeCombat : MonoBehaviour
     void AttacKTargets()
     {
         if (!isActive) return;
+        if (Time.deltaTime == 0) return;
         if (attackAvailable)
         {
             attackAvailable = false;
@@ -68,7 +71,11 @@ public class PlayerMeleeCombat : MonoBehaviour
                 if (t.TryGetComponent(out IDamagable success))
                     success.ApplyDamage(attackDamage);
                 if (t.TryGetComponent(out Arrow arrow))
-                    arrow.direction = -arrow.direction;
+                {
+                    arrow.hitLayers = bossLayer;
+                    arrow.direction = (t.transform.position - transform.position).normalized * arrow.direction.magnitude;
+                    OnDeflectedArrow.Invoke(gameObject);
+                }
             }
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4232883471416590890}
   - component: {fileID: 4232883471416590891}
   - component: {fileID: -3963381405309753269}
-  - component: {fileID: 1686995324971986629}
   - component: {fileID: 6195455020277732662}
   m_Layer: 6
   m_Name: Deer
@@ -32,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8874016486473629635}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,12 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 1
-  OnDamagedLocal:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDiedLocal:
-    m_PersistentCalls:
-      m_Calls: []
+  OnDamaged: {fileID: 11400000, guid: 1cab5012c9cd9354c9e295989634d289, type: 2}
+  OnDied: {fileID: 11400000, guid: 5b208cd54ad14654da6c5fc244ae07f0, type: 2}
+  CurrentHealth: 0
   moveRate: 0.06
   attackDamage: 1
   attackRate: 1
@@ -116,7 +113,7 @@ MonoBehaviour:
   OnAttackedTarget:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1686995324971986629}
+      - m_Target: {fileID: 5179140346833123030}
         m_TargetAssemblyTypeName: AudioFX, Assembly-CSharp
         m_MethodName: PlayFX
         m_Mode: 1
@@ -224,26 +221,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1686995324971986629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4232883471416590900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f775d2f9058f944857b4f0bc802586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayType: 0
-  useSource: 1
-  playClipAtPoint: 0
-  source: {fileID: -3963381405309753269}
-  clips:
-  - {fileID: 8300000, guid: 74cec7bb19463b640863e747c766fb0e, type: 3}
-  minMaxVolume: {x: 0.4, y: 0.6}
-  minMaxPitch: {x: 0.8, y: 1.2}
 --- !u!58 &6195455020277732662
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -260,3 +237,55 @@ CircleCollider2D:
   m_Offset: {x: 0.19, y: -1}
   serializedVersion: 2
   m_Radius: 2.44
+--- !u!1 &9216878782049112360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8874016486473629635}
+  - component: {fileID: 5179140346833123030}
+  m_Layer: 6
+  m_Name: AttackSounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8874016486473629635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216878782049112360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4232883471416590901}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5179140346833123030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216878782049112360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f775d2f9058f944857b4f0bc802586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayType: 0
+  useSource: 1
+  playClipAtPoint: 0
+  source: {fileID: -3963381405309753269}
+  clips:
+  - {fileID: 8300000, guid: 74cec7bb19463b640863e747c766fb0e, type: 3}
+  minMaxVolume: {x: 0.4, y: 0.6}
+  minMaxPitch: {x: 0.8, y: 1.2}

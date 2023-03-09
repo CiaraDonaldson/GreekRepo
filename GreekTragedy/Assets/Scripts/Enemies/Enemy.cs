@@ -8,24 +8,22 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     public static event Action<GameObject> OnEnemyDied;
     public int MaxHealth;
     [SerializeField, Tooltip("Local events for self, can't reference scene objects if prefab")] 
-    UnityEvent<GameObject> OnDamagedLocal;
+    GameEvent OnDamaged;
     [SerializeField, Tooltip("Local events for self, can't reference scene objects if prefab")] 
-    UnityEvent<GameObject> OnDiedLocal;
-    private int _currentHealth;
+    GameEvent OnDied;
+    public int CurrentHealth;
 
-    public int CurrentHealth
-    {
-        get => _currentHealth;
-        set => _currentHealth = value;
-    }
-
+    /// <summary>
+    /// Uses IDamagable inteface to apply damage to enemy
+    /// </summary>
+    /// <param name="amount">Amount of damage applied</param>
     public void ApplyDamage(int amount)
     {
-        _currentHealth = _currentHealth - amount <= 0 ? 0 : _currentHealth -= amount;
-        OnDamagedLocal?.Invoke(gameObject);
+        CurrentHealth = CurrentHealth - amount <= 0 ? 0 : CurrentHealth -= amount;
+        OnDamaged.Invoke(gameObject);
         OnEnemyDamaged?.Invoke(gameObject);
-        if (_currentHealth != 0) return;
-        OnDiedLocal?.Invoke(gameObject);
+        if (CurrentHealth != 0) return;
+        OnDied.Invoke(gameObject);
         OnEnemyDied?.Invoke(gameObject);
         gameObject.SetActive(false);
     }

@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45a90c9acd3c5446ada6434345c1d35, type: 3}
-  m_Name: ResetDialog
+  m_Script: {fileID: 11500000, guid: 20085244564217942bb6ce63c4b94d01, type: 3}
+  m_Name: OnDeerDied
   m_EditorClassIdentifier: 
-  broadcast: 0
-  resetOnDisable: 1
-  resetValue: 0
-  _currentValue: 0

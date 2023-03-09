@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class WaveGenerator : MonoBehaviour
 {
     public static int CurrentWave = 0;
+    [SerializeField] PlayerMove playerMove;
     [SerializeField] TMP_Text currentWaveText;
     [SerializeField] int maxWaves;
     [SerializeField, Tooltip("Every wave has this static amount plus Adds if any")] int enemiesPerWaveStatic;
@@ -63,7 +64,7 @@ public class WaveGenerator : MonoBehaviour
         for (int i = 0; i < totalToSpawn; i++)
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
-            Vector2 newPos = new (Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
+            Vector2 newPos = new (Random.Range(-playerMove.roomSize.x * .5f, playerMove.roomSize.x * .5f), Random.Range(-playerMove.roomSize.y * .5f, playerMove.roomSize.y * .5f));
             GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity, enemiesParent);
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);

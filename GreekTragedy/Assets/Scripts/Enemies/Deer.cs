@@ -10,10 +10,16 @@ public sealed class Deer : Enemy
     public Vector2 minMaxRandomWait;
     [SerializeField] float spawnAttackDelay = 1;
     [SerializeField] UnityEvent<GameObject> OnAttackedTarget;
-    Vector2 targetLocation;
+    PlayerMove _playerMove;
+    Vector2 _targetLocation;
     GameObject _player;
     float _currentAttack;
-    bool ableToAttack;
+    bool _ableToAttack;
+
+    private void Awake()
+    {
+        _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
+    }
 
     private void OnEnable()
     {
@@ -26,16 +32,16 @@ public sealed class Deer : Enemy
 
     private void OnDisable() => CancelInvoke(nameof(CanAttack));
 
-    void CanAttack() => ableToAttack = true;
+    void CanAttack() => _ableToAttack = true;
 
     private void FixedUpdate()
     {
-        if (!ableToAttack) return;
+        if (!_ableToAttack) return;
         _currentAttack = _currentAttack < 0 ? 0 : _currentAttack -= Time.deltaTime;
         if (_player == null) return;
-        targetLocation = _player.transform.position;
+        _targetLocation = _player.transform.position;
         if (Vector3.Distance(_player.transform.position, transform.position) > attackDistance)
-            transform.position = Vector2.MoveTowards((Vector2)transform.position, targetLocation, moveRate);
+            transform.position = Vector2.MoveTowards((Vector2)transform.position, _targetLocation, moveRate);
         if (_currentAttack == 0 & Vector3.Distance(_player.transform.position, transform.position) <= attackDistance)
         {
             _currentAttack = attackRate;
@@ -52,6 +58,6 @@ public sealed class Deer : Enemy
 
     void SetTargetLocation()
     {
-        targetLocation = new Vector2(Random.Range(-PlayerMove.ROOM_SIZE.x * .5f, PlayerMove.ROOM_SIZE.x * .5f), Random.Range(-PlayerMove.ROOM_SIZE.y * .5f, PlayerMove.ROOM_SIZE.y * .5f));
+        _targetLocation = new Vector2(Random.Range(-_playerMove.roomSize.x * .5f, _playerMove.roomSize.x * .5f), Random.Range(-_playerMove.roomSize.y * .5f, _playerMove.roomSize.y * .5f));
     }
 }

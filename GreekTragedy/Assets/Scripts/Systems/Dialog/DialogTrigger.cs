@@ -74,6 +74,11 @@ public sealed class DialogTrigger : MonoBehaviour
     {
         if (gameObject.activeSelf)
             StartCoroutine(TriggerDialog());
+        else
+        {
+            gameObject.SetActive(true);
+            StartCoroutine(TriggerDialog());
+        }
     }
 
     IEnumerator TriggerDialog()

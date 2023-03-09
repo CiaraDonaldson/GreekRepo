@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    public static Vector2 ROOM_CENTER, ROOM_SIZE;
+    public Vector2 roomCenter;
+    public Vector2 roomSize;
     [SerializeField] float moveSpeed;
     [SerializeField] KeyCode dashKey;
     [SerializeField] float dashDistance;
     [SerializeField] float dashResetTime;
     [SerializeField] float knockbackDistance = .2f;
     float _currentTime;
-    [SerializeField] Vector2 roomCenter;
-    [SerializeField] Vector2 roomSize;
     [SerializeField] Vector2 playerOffset;
     [SerializeField] Image dashIndicator;
     [SerializeField] UnityEvent<Vector3> OnDashActivated;
@@ -53,11 +52,5 @@ public class PlayerMove : MonoBehaviour
         Gizmos.DrawWireCube(roomCenter, roomSize);
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(roomCenter, roomSize - playerOffset);
-    }
-
-    private void OnValidate()
-    {
-        ROOM_SIZE = roomSize;
-        ROOM_CENTER = roomCenter;
     }
 }
