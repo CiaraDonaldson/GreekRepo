@@ -19,6 +19,12 @@ public class PlayerMove : MonoBehaviour
     Vector2 _moveDirection;
 
 
+    Animator anim;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     void Update()
     {
         _currentTime = _currentTime > dashResetTime ? dashResetTime : _currentTime += Time.deltaTime;
@@ -30,6 +36,18 @@ public class PlayerMove : MonoBehaviour
         Vector2 roomMax = roomCenter + roomSize / 2;
         newPos.x = Mathf.Clamp(newPos.x, roomMin.x + playerOffset.x, roomMax.x - playerOffset.x);
         newPos.y = Mathf.Clamp(newPos.y, roomMin.y + playerOffset.y, roomMax.y - playerOffset.y);
+
+
+        if (_moveDirection.x != 0f | _moveDirection.y != 0f)
+        {
+            anim.Play("Run");
+        }
+        else 
+        {            
+            anim.Play("Idle");
+        }
+
+
         if (Input.GetKey(dashKey) && _currentTime == dashResetTime)
         {
             _currentTime = 0;
