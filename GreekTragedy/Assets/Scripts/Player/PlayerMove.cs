@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
         else 
         {            
             anim.Play("Idle");
+            //HERE
         }
 
 
