@@ -10,6 +10,7 @@ public sealed class Deer : Enemy
     public Vector2 minMaxRandomWait;
     [SerializeField] float spawnAttackDelay = 1;
     [SerializeField] UnityEvent<GameObject> OnAttackedTarget;
+    SpriteRenderer _spriteRenderer;
     PlayerMove _playerMove;
     Vector2 _targetLocation;
     GameObject _player;
@@ -19,6 +20,7 @@ public sealed class Deer : Enemy
     private void Awake()
     {
         _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -38,6 +40,12 @@ public sealed class Deer : Enemy
     {
         if (!_ableToAttack) return;
         _currentAttack = _currentAttack < 0 ? 0 : _currentAttack -= Time.deltaTime;
+
+        if ((_targetLocation - (Vector2)transform.position).x < 0)
+            _spriteRenderer.flipX = false;
+        else if ((_targetLocation - (Vector2)transform.position).x > 0)
+            _spriteRenderer.flipX = true;
+
         if (_player == null) return;
         _targetLocation = _player.transform.position;
         if (Vector3.Distance(_player.transform.position, transform.position) > attackDistance)

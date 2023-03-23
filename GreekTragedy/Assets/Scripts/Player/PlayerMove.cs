@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Vector2 playerOffset;
     [SerializeField] Image dashIndicator;
     [SerializeField] UnityEvent<Vector3> OnDashActivated;
+    SpriteRenderer sRend;
     Vector2 _moveDirection;
 
 
@@ -23,6 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        sRend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
     void Update()
@@ -37,16 +39,18 @@ public class PlayerMove : MonoBehaviour
         newPos.x = Mathf.Clamp(newPos.x, roomMin.x + playerOffset.x, roomMax.x - playerOffset.x);
         newPos.y = Mathf.Clamp(newPos.y, roomMin.y + playerOffset.y, roomMax.y - playerOffset.y);
 
+        if (_moveDirection.x < 0)
+            sRend.flipX = false;
+        else if (_moveDirection.x > 0)
+            sRend.flipX = true;
 
         if (_moveDirection.x != 0f | _moveDirection.y != 0f)
         {
             anim.SetTrigger("Run");
-            print($"Running!");
         }
         else 
         {            
             anim.SetTrigger("Idle");
-            //HERE
         }
 
 
