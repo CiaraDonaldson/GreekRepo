@@ -40,11 +40,12 @@ public class PlayerMove : MonoBehaviour
 
         if (_moveDirection.x != 0f | _moveDirection.y != 0f)
         {
-            anim.Play("Run");
+            anim.SetTrigger("Run");
+            print($"Running!");
         }
         else 
         {            
-            anim.Play("Idle");
+            anim.SetTrigger("Idle");
             //HERE
         }
 
