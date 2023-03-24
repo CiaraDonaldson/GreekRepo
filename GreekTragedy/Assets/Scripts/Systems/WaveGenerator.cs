@@ -36,6 +36,7 @@ public class WaveGenerator : MonoBehaviour
     private void OnEnable()
     {
         CurrentWave = 0;
+        currentWaveText.text = $"Waves Left: {Mathf.Abs(maxWaves - CurrentWave - 1)}";
         Enemy.OnEnemyDied += RemoveEnemyFromList;
     }
 
@@ -82,6 +83,8 @@ public class WaveGenerator : MonoBehaviour
         foreach (var e in _currentEnemies)
             Destroy(e);
     }
+
+    public void SetMaxWaves(int maxWaves) => this.maxWaves = maxWaves;
 
     public void StopSpawningWave() => StopAllCoroutines();
 }

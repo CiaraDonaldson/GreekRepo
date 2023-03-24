@@ -19,8 +19,10 @@ public sealed class Deer : Enemy
 
     private void Awake()
     {
-        _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return;
+        _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
     }
 
     private void OnEnable()

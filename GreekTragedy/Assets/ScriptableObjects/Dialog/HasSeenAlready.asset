@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcast: 0
   resetOnDisable: 0
+  resetImmediately: 0
   resetValue: 0
   _currentValue: 1

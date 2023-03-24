@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Artemis : Enemy
@@ -19,6 +20,8 @@ public class Artemis : Enemy
     [SerializeField] int numberOfShots;
     [SerializeField] float arrowSpread;
     [SerializeField] List<Transform> attackLocations = new();
+    [SerializeField] UnityEvent<GameObject> OnHalfHealth, OnLowHealth;
+    bool _firedHalfHealthEvent, _firedLowHealthEvent;
     Vector3 targetLocation;
     bool hasSetLocation;
     
@@ -63,5 +66,18 @@ public class Artemis : Enemy
         healthBar.value = MaxHealth;
     }
 
-    public void UpdateHealthBar() => healthBar.value = CurrentHealth;
+    public void UpdateHealthBar()
+    {
+        healthBar.value = CurrentHealth;
+        if (healthBar.value < MaxHealth / 6 && !_firedLowHealthEvent)
+        {
+            _firedLowHealthEvent = true;
+            OnLowHealth?.Invoke(gameObject);
+        }
+        else if (healthBar.value < MaxHealth / 2 && !_firedHalfHealthEvent)
+        {
+            _firedHalfHealthEvent = true;
+            OnHalfHealth?.Invoke(gameObject);
+        }
+    }
 }
