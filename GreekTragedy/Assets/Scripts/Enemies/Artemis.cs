@@ -24,18 +24,24 @@ public class Artemis : Enemy
     bool _firedHalfHealthEvent, _firedLowHealthEvent;
     Vector3 targetLocation;
     bool hasSetLocation;
-    
+
+    Animator anim;
+
     private void OnEnable()
     {
         CurrentHealth = MaxHealth;
         InitializeHealthBar();
     }
-
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         switch (currentState)
         {
             case BossState.Moving:
+                anim.SetTrigger("Run");
                 if (!hasSetLocation)
                 {
                     hasSetLocation = true;
@@ -46,6 +52,7 @@ public class Artemis : Enemy
                     currentState = BossState.Attacking;
                 break;
             case BossState.Attacking:
+                anim.SetTrigger("Attack");
                 for (int i = 0; i < numberOfShots; ++i)
                 {
                     Arrow arrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity).GetComponent<Arrow>();
