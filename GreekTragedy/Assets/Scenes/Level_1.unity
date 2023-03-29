@@ -459,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &120065550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1028,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &367228811
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,6 +1129,18 @@ MonoBehaviour:
       - m_Target: {fileID: 367228812}
         m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
         m_MethodName: StopAllCoroutines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 367228812}
+        m_TargetAssemblyTypeName: WaveGenerator, Assembly-CSharp
+        m_MethodName: RemoveAllCurrentEnemies
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1322,6 +1334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624a82ef7317c55438a8e2ff0cb548fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showCursor: 1
 --- !u!1 &489208500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,6 +1995,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1593934905}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2950,19 +2975,7 @@ MonoBehaviour:
   - {fileID: 2061683039}
   OnHalfHealth:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 41686507}
-        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnLowHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -4409,7 +4422,19 @@ MonoBehaviour:
   enemiesParent: {fileID: 1674343871}
   OnStartedWaves:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 120065549}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnEnemySpawned:
     m_PersistentCalls:
       m_Calls:
@@ -6357,6 +6382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049916535}
   - component: {fileID: 2049916536}
+  - component: {fileID: 2049916537}
   m_Layer: 0
   m_Name: Damaged
   m_TagString: Untagged
@@ -6407,6 +6433,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2049916537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049916534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f775d2f9058f944857b4f0bc802586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayType: 0
+  useSource: 1
+  playClipAtPoint: 0
+  source: {fileID: 1487088701}
+  clips: []
+  minMaxVolume: {x: 0.4, y: 0.6}
+  minMaxPitch: {x: 1, y: 1}
 --- !u!1 &2061683038
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,5 @@ public class WaveGenerator : MonoBehaviour
             Destroy(e);
     }
 
-    public void SetMaxWaves(int maxWaves) => this.maxWaves = maxWaves;
-
     public void StopSpawningWave() => StopAllCoroutines();
 }

@@ -69,12 +69,12 @@ public class Artemis : Enemy
     public void UpdateHealthBar()
     {
         healthBar.value = CurrentHealth;
-        if (healthBar.value < MaxHealth / 6 && !_firedLowHealthEvent)
+        if (healthBar.value < MaxHealth / 6 & !_firedLowHealthEvent)
         {
             _firedLowHealthEvent = true;
             OnLowHealth?.Invoke(gameObject);
         }
-        else if (healthBar.value < MaxHealth / 2 && !_firedHalfHealthEvent)
+        else if (healthBar.value < MaxHealth / 2 & !_firedHalfHealthEvent)
         {
             _firedHalfHealthEvent = true;
             OnHalfHealth?.Invoke(gameObject);
