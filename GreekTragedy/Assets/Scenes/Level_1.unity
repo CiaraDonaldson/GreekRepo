@@ -3560,36 +3560,35 @@ MonoBehaviour:
   preDialogDelay: 0.2
   dialog:
   - speaker: Hermes
-    line: Forgive my rude intrusion, but I seek an audience with the three fates.
-      Something has happened to the gods and-
+    line: Hello? The Three fates? I would ask forgiveness for my sudden appearance,
+      but this time seems appropriate-
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 0
     textSpeed: 0.034
     delayAfterLine: 2
   - speaker: The Three Fates
-    line: We know, child. The corruption has taken hold of Mount Olympus. However,
-      with old magic, we managed to trap the majority of the gods there.
+    line: "We know why you\u2019re here, child. The gods have fallen ill due to the
+      corruption, but with our combined power, we managed to contain them and it."
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: "oh\u2026well alright then, I guess that\u2019s it."
+    line: "oh\u2026well alrighty then, guess my job is over."
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: The Three Fates
-    line: Not so fast child, that would be the only good news you will hear from
-      us. For you see, you will have to face and defeat the corrupted gods that made
-      it out of our magic.
+    line: " Not so fast child, some of the gods have managed to slip through our
+      grasp and it\u2019s up to you to defeat them. "
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: Hold on, why must I fight the corrupted gods? Surely I can speak to them
-      to see why.
+    line: "Hold on now, I\u2019m just the messenger and last I checked messengers
+      talk, not fight. "
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
@@ -3601,20 +3600,30 @@ MonoBehaviour:
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
+  - speaker: Hermes
+    line: Or how about I deliver your statement as a message to a random mortal and
+      have them do it!
+    image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
+    waitForContinueButton: 1
+    textSpeed: 0.02
+    delayAfterLine: 1
   - speaker: The Three Fates
-    line: 'Take this sword and use the ''Left Mouse'' to destroy your enemies! '
+    line: "ENOUGH, take this blade and use the  \u2018Left Mouse\u2019 to swing it
+      and with your speed you should be able to perform a dash using \u2018Left Shift\u2019
+      to evade attacks.  "
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: The Three Fates
-    line: Also, don't forgot to use your dash ability with the 'Left Shift' button!
+    line: Through YOUR journey, you will find more means to defend yourself. Now
+      leave.
     image: {fileID: 21300000, guid: 5f87b49233a55774a83bdf519653f2ab, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: "Very well then, I\u2019ll be off."
+    line: '*Sigh* Very well.'
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
@@ -4318,27 +4327,29 @@ MonoBehaviour:
   preDialogDelay: 1
   dialog:
   - speaker: Hermes
-    line: Are you alright Artemis?
+    line: "Are you alright Artemis or do you need what the mortals call \u201Ca chill
+      pill\u201D"
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Artemis
-    line: I am. Have you seen Apollo?
+    line: "Shut up Clown\u2026Have you seen Apollo?"
     image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Hermes
-    line: "He\u2019s currently in Mount Olympus, but there\u2019s no way in or out
-      due to the fates magic."
+    line: Unfortunately no, from my understanding the three fates have him and the
+      other corrupted gods locked away with their power.
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Artemis
-    line: "I see, I\u2019ll go to the fates and see if they require anything of me,
-      but before I go I will give you this bow. Use it in earnest."
+    line: "I see, I don\u2019t trust the simple messanger god to fix our problems,
+      but I\u2019m to weakened to join you after the fight we had. So take this bow,
+      Use it in earnest."
     image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
@@ -4713,19 +4724,19 @@ MonoBehaviour:
   preDialogDelay: 1
   dialog:
   - speaker: Corrupted Artemis
-    line: How dare you destroy my lovely beasts!
+    line: A fool has entered my domain.
     image: {fileID: 21300000, guid: 55dcb21361b44694bb93ccd7ec938954, type: 3}
     waitForContinueButton: 0
     textSpeed: 0.1
     delayAfterLine: 1
   - speaker: Hermes
-    line: Artemis! You need to stop this!
+    line: Artemis? Of course, if I defeat you then you can take over this quest!
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
     waitForContinueButton: 0
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Corrupted Artemis
-    line: Fool! You will be destroyed!
+    line: "Be silent clown.. or don\u2019t. I\u2019ll enjoy hearing you beg for mercy. "
     image: {fileID: 21300000, guid: 55dcb21361b44694bb93ccd7ec938954, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.1
