@@ -14,6 +14,7 @@ public class Artemis : Enemy
     }
 
     [SerializeField] BossState currentState;
+    [SerializeField] int arrowDamage = 1;
     [SerializeField] Slider healthBar;
     [SerializeField] float moveRate;
     [SerializeField] GameObject arrowPrefab;
@@ -56,6 +57,7 @@ public class Artemis : Enemy
                 for (int i = 0; i < numberOfShots; ++i)
                 {
                     Arrow arrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity).GetComponent<Arrow>();
+                    arrow.damage = arrowDamage;
                     arrow.direction = new(-targetLocation.x, -targetLocation.y > 0 ? -targetLocation.y + i * arrowSpread : -targetLocation.y - i * arrowSpread);
                 }
                 hasSetLocation = false;

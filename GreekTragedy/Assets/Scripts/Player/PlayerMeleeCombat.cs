@@ -1,5 +1,6 @@
 using darcproducts;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ public class PlayerMeleeCombat : MonoBehaviour
     [SerializeField] LayerMask bossLayer;
     [SerializeField] GameObject aimCursor;
     [SerializeField] GameEvent OnDeflectedArrow;
+    [SerializeField] GameObject damageText;
+    [SerializeField] Vector2 damageOffset = Vector2.zero;
     [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
     [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
     bool attackAvailable = true;
@@ -30,7 +33,19 @@ public class PlayerMeleeCombat : MonoBehaviour
         private set { }
     }
 
-    void Start() => _cam = Camera.main;
+    void Start()
+    {
+        _cam = Camera.main;
+    }
+
+    public void ShowDamage(GameObject location)
+    {
+        GameObject dmg = Instantiate(damageText, location.transform.position + (Vector3)damageOffset, Quaternion.identity);
+        if (dmg.TryGetComponent(out TMP_Text text))
+        {
+            text.text = attackDamage.ToString();
+        }
+    }
 
     public void SetAbleToAttack(bool newValue) => isActive = newValue;
 
@@ -73,6 +88,7 @@ public class PlayerMeleeCombat : MonoBehaviour
                 if (t.TryGetComponent(out Arrow arrow))
                 {
                     arrow.hitLayers = bossLayer;
+                    arrow.damage = attackDamage;
                     arrow.direction = (t.transform.position - transform.position).normalized * arrow.direction.magnitude;
                     OnDeflectedArrow.Invoke(gameObject);
                 }

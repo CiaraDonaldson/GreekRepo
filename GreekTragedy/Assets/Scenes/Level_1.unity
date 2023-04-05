@@ -738,7 +738,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0}
   randomizeOffset: 0
   randomizeOffsetSize: 1
-  objectToSpawn: {fileID: 5239214233237965706, guid: 0aef86874b99840428fd41b15b9e21df, type: 3}
+  objectToSpawn: {fileID: 6658152740150256663, guid: a89e8686309336547b5ce291ad3d74a7, type: 3}
 --- !u!114 &300746047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackKey: 323
-  attackDamage: 1
+  attackDamage: 5
   meleeAttackDistance: 1.5
   meleeAttackRadius: 0.6
   attackDelay: 0.4
@@ -2354,6 +2354,8 @@ MonoBehaviour:
     m_Bits: 64
   aimCursor: {fileID: 66408813}
   OnDeflectedArrow: {fileID: 11400000, guid: 3d37e233364c0e1469b84d2381b3b30b, type: 2}
+  damageText: {fileID: 3684680907559909498, guid: 5896808e7bceddd4d85043adf9bf781e, type: 3}
+  damageOffset: {x: 0, y: 0.5}
   OnAttackHit:
     m_PersistentCalls:
       m_Calls:
@@ -2365,6 +2367,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 861891931}
+        m_TargetAssemblyTypeName: PlayerMeleeCombat, Assembly-CSharp
+        m_MethodName: ShowDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2460,7 +2474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4dc249f65ffc74ebd344e9a95bc3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 8
   healthIconRenderer: {fileID: 2104342565}
   healthIconPrefab: {fileID: 3344618144512170453, guid: 967ede273d7c56d428197c5aad8e4e9d, type: 3}
   OnPlayerDamaged:
@@ -2481,6 +2495,18 @@ MonoBehaviour:
       - m_Target: {fileID: 401907199}
         m_TargetAssemblyTypeName: AudioFX, Assembly-CSharp
         m_MethodName: PlayFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 861891934}
+        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
+        m_MethodName: ShowVignette
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2530,6 +2556,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   delayedDiedEventTime: 3
+  damageVignette: {fileID: 1121320427}
+  damageVignetteTime: 0.2
   OnPlayerDiedDelayed:
     m_PersistentCalls:
       m_Calls:
@@ -2628,6 +2656,7 @@ GameObject:
   - component: {fileID: 956088390}
   - component: {fileID: 956088392}
   - component: {fileID: 956088391}
+  - component: {fileID: 956088393}
   m_Layer: 0
   m_Name: SpawnFX
   m_TagString: Untagged
@@ -2766,6 +2795,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &956088393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956088389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777aad2160c45244a2830bb0c88d83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 1
+  minMaxScaleMultiplier: {x: 0, y: 0}
+  minMaxAmountToSpawn: {x: 1, y: 1}
+  offset: {x: 0, y: 0}
+  randomizeOffset: 0
+  randomizeOffsetSize: 1
+  objectToSpawn: {fileID: 3368410125779951378, guid: be984cc4ec385ed4493f66e6378b3006, type: 3}
 --- !u!1 &956493671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,6 +2903,7 @@ GameObject:
   - component: {fileID: 968056079}
   - component: {fileID: 968056080}
   - component: {fileID: 968056081}
+  - component: {fileID: 968056082}
   m_Layer: 6
   m_Name: Artemis
   m_TagString: Untagged
@@ -2871,7 +2920,7 @@ Transform:
   m_GameObject: {fileID: 968056076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1200862030}
@@ -2919,7 +2968,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2e974b87f333db54391100fd400fa8d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 132b56217f4ea7d4e80755ae8fd920da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2958,11 +3007,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a4c357b76b97a44927e1f8802fd235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 100
   OnDamaged: {fileID: 11400000, guid: 6125cd5b8a5b5044a919b2223d568d91, type: 2}
   OnDied: {fileID: 11400000, guid: 2ec18a0127f384d42af483349d784a9e, type: 2}
   CurrentHealth: 0
   currentState: 0
+  arrowDamage: 1
   healthBar: {fileID: 2114093622}
   moveRate: 2.2
   arrowPrefab: {fileID: 7148367544027143770, guid: d9e756933a7a1864a8505e8df8627861, type: 3}
@@ -3000,6 +3050,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!95 &968056082
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968056076}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b760cd62ffaa194c832b290a7cfd5e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1011552907
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,6 +3417,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1121320424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1121320425}
+  - component: {fileID: 1121320427}
+  - component: {fileID: 1121320426}
+  m_Layer: 0
+  m_Name: DamageVignette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1121320425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121320424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1646881596}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1121320426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121320424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.31764707}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7a5a5c4339985674ca26fa833ca083a1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1121320427
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121320424}
+  m_CullTransparentMesh: 1
 --- !u!1 &1122429356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4453,6 +4599,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: AudioFX, Assembly-CSharp
         m_MethodName: PlayFX
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 956088393}
+        m_TargetAssemblyTypeName: CreateObject, Assembly-CSharp
+        m_MethodName: CreateNewObject
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5773,6 +5931,7 @@ RectTransform:
   - {fileID: 631151027}
   - {fileID: 2114093621}
   - {fileID: 120065550}
+  - {fileID: 1121320425}
   m_Father: {fileID: 107892360}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6072,7 +6231,7 @@ GameObject:
   - component: {fileID: 1775703045}
   - component: {fileID: 1775703044}
   m_Layer: 0
-  m_Name: bear_walk1
+  m_Name: bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6158,8 +6317,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775703043}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.43, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1674343871}
@@ -6267,7 +6426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1935868494
 RectTransform:
   m_ObjectHideFlags: 0
