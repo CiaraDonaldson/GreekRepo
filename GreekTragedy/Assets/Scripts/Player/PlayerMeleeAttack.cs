@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerMeleeCombat : MonoBehaviour
+public class PlayerMeleeAttack : MonoBehaviour
 {
     [SerializeField] KeyCode attackKey;
     [SerializeField] int attackDamage;
@@ -84,7 +84,7 @@ public class PlayerMeleeCombat : MonoBehaviour
             foreach (var t in hitTargets)
             {
                 if (t.TryGetComponent(out IDamagable success))
-                    success.ApplyDamage(attackDamage);
+                    success.ApplyDamage(gameObject, attackDamage);
                 if (t.TryGetComponent(out Arrow arrow))
                 {
                     arrow.hitLayers = bossLayer;

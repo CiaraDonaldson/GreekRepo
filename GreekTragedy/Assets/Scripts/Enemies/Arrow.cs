@@ -1,6 +1,5 @@
 using darcproducts;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Arrow : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class Arrow : MonoBehaviour
         if (!Utilities.IsInLayerMask(collision.gameObject, hitLayers)) return;
         if (collision.TryGetComponent(out IDamagable damaged))
         {
-            damaged.ApplyDamage(damage);
+            damaged.ApplyDamage(gameObject, damage);
             OnArrowHit.Invoke(gameObject);
             gameObject.SetActive(false);
         }

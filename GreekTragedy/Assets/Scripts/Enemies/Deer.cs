@@ -57,7 +57,7 @@ public sealed class Deer : Enemy
             _currentAttack = attackRate;
             if (_player.TryGetComponent(out IDamagable damagable))
             {
-                damagable.ApplyDamage(attackDamage);
+                damagable.ApplyDamage(gameObject, attackDamage);
                 if (_player.TryGetComponent(out PlayerMove move))
                     move.KnockBack((_player.transform.position - transform.position).normalized);
                 OnAttackedTarget?.Invoke(gameObject);

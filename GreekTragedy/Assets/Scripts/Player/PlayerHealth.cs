@@ -24,11 +24,11 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
         damageVignette.gameObject.SetActive(false);
     }
 
-        /// <summary>
-        /// Applies damage to enemy targets
-        /// </summary>
-        /// <param name="amount">Amount of damage you want to inflict</param>
-        public void ApplyDamage(int amount)
+    /// <summary>
+    /// Applies damage to enemy targets
+    /// </summary>
+    /// <param name="amount">Amount of damage you want to inflict</param>
+    public void ApplyDamage(GameObject incObj, int amount)
     {
         _currentHealth -= amount;
         _currentHealth = _currentHealth < 0 ? 0 : _currentHealth;

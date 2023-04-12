@@ -65,7 +65,7 @@ public class WaveGenerator : MonoBehaviour
         for (int i = 0; i < totalToSpawn; i++)
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
-            Vector2 newPos = new (Random.Range(-playerMove.roomSize.x * .5f, playerMove.roomSize.x * .5f), Random.Range(-playerMove.roomSize.y * .5f, playerMove.roomSize.y * .5f));
+            Vector2 newPos = new(Random.Range(-playerMove.roomSize.x * .5f, playerMove.roomSize.x * .5f), Random.Range(-playerMove.roomSize.y * .5f, playerMove.roomSize.y * .5f));
             GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity, enemiesParent);
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3963381405309753269}
   - component: {fileID: 6195455020277732662}
   - component: {fileID: 5534320775261686799}
+  - component: {fileID: -1569593259346778612}
   m_Layer: 6
   m_Name: Deer
   m_TagString: Untagged
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  useTargetWhenDamaged: 1
   OnDamaged: {fileID: 11400000, guid: 1cab5012c9cd9354c9e295989634d289, type: 2}
   OnDied: {fileID: 11400000, guid: 5b208cd54ad14654da6c5fc244ae07f0, type: 2}
   CurrentHealth: 0
@@ -258,6 +260,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!50 &-1569593259346778612
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232883471416590900}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &9216878782049112360
 GameObject:
   m_ObjectHideFlags: 0

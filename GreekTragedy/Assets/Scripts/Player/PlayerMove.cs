@@ -48,8 +48,8 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetTrigger("Run");
         }
-        else 
-        {            
+        else
+        {
             anim.SetTrigger("Idle");
         }
 

@@ -135,7 +135,7 @@ public sealed class DialogTrigger : MonoBehaviour
                 FinishDialog();
         }
         else
-            FinishDialog(); 
+            FinishDialog();
     }
 
     void FinishDialog()
