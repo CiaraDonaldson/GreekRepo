@@ -16,4 +16,4 @@ MonoBehaviour:
   resetOnDisable: 0
   resetImmediately: 0
   resetValue: 0
-  _currentValue: 1
+  _currentValue: 0
