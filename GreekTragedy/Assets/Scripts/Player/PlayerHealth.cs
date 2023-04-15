@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public sealed class PlayerHealth : MonoBehaviour, IDamagable
 {
@@ -69,8 +71,11 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     {
         if (healthIcons.Count == 0) return;
         GameObject icon = healthIcons[^1];
-        healthIcons.Remove(icon);
-        Destroy(icon);
+        Vector2 pos = icon.transform.position;
+        if (icon.TryGetComponent(out Image image))
+            image.DOColor(new Color(1, 0, 0, 0), .2f);
+        icon.transform.DOShakeRotation(.2f).SetEase(Ease.OutFlash);
+        icon.transform.DOMoveY(pos.y - 1, .2f).SetEase(Ease.OutSine).OnComplete(() => { healthIcons.Remove(icon); DOTween.KillAll(); Destroy(icon); });
     }
 
     void SendDelayedDiedEvent() => OnPlayerDiedDelayed?.Invoke(gameObject);

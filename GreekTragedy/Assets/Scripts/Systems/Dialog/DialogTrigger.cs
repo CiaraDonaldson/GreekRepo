@@ -112,7 +112,10 @@ public sealed class DialogTrigger : MonoBehaviour
                 string line = dialog.line;
                 foreach (var character in line)
                 {
-                    yield return new WaitForSecondsRealtime(dialog.textSpeed);
+                    if (!Input.GetKey(KeyCode.Space))
+                        yield return new WaitForSecondsRealtime(dialog.textSpeed);
+                    else
+                        yield return new WaitForSecondsRealtime(.001f);
                     talkerDialogTMPText.text += character;
                 }
 

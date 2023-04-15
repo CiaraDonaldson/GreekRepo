@@ -1002,6 +1002,7 @@ GameObject:
   - component: {fileID: 364779112}
   - component: {fileID: 364779111}
   - component: {fileID: 364779110}
+  - component: {fileID: 364779113}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1017,8 +1018,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364779108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 33.44, y: 18.900002, z: 1}
+  m_LocalPosition: {x: -0.4, y: 0.3, z: 0}
+  m_LocalScale: {x: 31, y: 18.900002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1674343871}
@@ -1088,6 +1089,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364779108}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &364779113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364779108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c973f50a01b764da8bd0df5bc26001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customSpriteShader: {fileID: 4800000, guid: a1b7276658fe4d640845b9d86dca2ea9, type: 3}
 --- !u!1 &367228810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,6 +2147,30 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 364779113}
+        m_TargetAssemblyTypeName: TintShaderController, Assembly-CSharp
+        m_MethodName: SetTintB
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 364779113}
+        m_TargetAssemblyTypeName: TintShaderController, Assembly-CSharp
+        m_MethodName: SetTintG
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1397012199}
         m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
         m_MethodName: Trigger
@@ -2160,6 +2198,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1593934905}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1602727746}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4265,7 +4315,7 @@ MonoBehaviour:
 
     End of Demo.
 
-    Thank you for playing'
+    Thank you for playing!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1b0f64e621a283c4b86bf94426771b11, type: 2}
   m_sharedMaterial: {fileID: 6568458717570567956, guid: 1b0f64e621a283c4b86bf94426771b11, type: 2}
@@ -4297,7 +4347,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 39.3
+  m_fontSizeMax: 32
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -5292,7 +5342,31 @@ MonoBehaviour:
   continueDialogKey: 32
   OnDialogStarted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 364779113}
+        m_TargetAssemblyTypeName: TintShaderController, Assembly-CSharp
+        m_MethodName: SetTintG
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.8
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 364779113}
+        m_TargetAssemblyTypeName: TintShaderController, Assembly-CSharp
+        m_MethodName: SetTintB
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.8
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDialogFinished:
     m_PersistentCalls:
       m_Calls:

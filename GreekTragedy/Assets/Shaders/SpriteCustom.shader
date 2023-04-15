@@ -4,6 +4,9 @@ Shader "Custom/Sprite"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1, 1, 1, 1)
+        _TintR ("Tint Red", Range(0.0, 1.0)) = 1.0
+        _TintG ("Tint Green", Range(0.0, 1.0)) = 1.0
+        _TintB ("Tint Blue", Range(0.0, 1.0)) = 1.0
     }
     SubShader
     {
@@ -33,6 +36,9 @@ Shader "Custom/Sprite"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _Color;
+            float _TintR;
+            float _TintG;
+            float _TintB;
 
             v2f vert (appdata v)
             {
@@ -45,7 +51,10 @@ Shader "Custom/Sprite"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return col * _Color;
+                col.rgb = col.rgb * float3(_TintR, _TintG, _TintB);
+                col.rgb = col.rgb * _Color.rgb;
+                col.a *= _Color.a;
+                return col;
             }
             ENDCG
         }
