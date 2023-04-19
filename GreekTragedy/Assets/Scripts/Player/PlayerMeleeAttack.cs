@@ -27,9 +27,14 @@ public class PlayerMeleeAttack : MonoBehaviour
     float _attackTime;
     Vector2 _attackPosition;
     Camera _cam;
-
+    Animator anim;
+<<<<<<< Updated upstream
     private void Awake() => playerRanged = GetComponent<PlayerRangeAttack>();
 
+=======
+
+  
+>>>>>>> Stashed changes
     public Vector2 AttackPosition
     {
         get => _attackPosition;
@@ -39,8 +44,10 @@ public class PlayerMeleeAttack : MonoBehaviour
     void Start()
     {
         _cam = Camera.main;
+        anim = GetComponent<Animator>();
     }
 
+   
     public void ShowDamage(GameObject location)
     {
         GameObject dmg = Instantiate(damageText, location.transform.position + (Vector3)damageOffset, Quaternion.identity);
@@ -67,6 +74,8 @@ public class PlayerMeleeAttack : MonoBehaviour
         aimCursor.transform.position = _attackPosition;
         if (Input.GetKeyDown(attackKey))
             AttacKTargets();
+
+       
     }
 
     void AttacKTargets()
@@ -75,6 +84,7 @@ public class PlayerMeleeAttack : MonoBehaviour
         if (Time.deltaTime == 0) return;
         if (attackAvailable)
         {
+            anim.SetTrigger("Attack");
             attackAvailable = false;
             _attackTime = 0;
             Collider2D[] hitTargets = Physics2D.OverlapCircleAll(_attackPosition, meleeAttackRadius, hitLayers);
@@ -98,6 +108,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             }
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
+            
         }
     }
 
