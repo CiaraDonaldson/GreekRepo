@@ -28,13 +28,12 @@ public class PlayerMeleeAttack : MonoBehaviour
     Vector2 _attackPosition;
     Camera _cam;
     Animator anim;
-<<<<<<< Updated upstream
+
+
+
     private void Awake() => playerRanged = GetComponent<PlayerRangeAttack>();
 
-=======
 
-  
->>>>>>> Stashed changes
     public Vector2 AttackPosition
     {
         get => _attackPosition;
