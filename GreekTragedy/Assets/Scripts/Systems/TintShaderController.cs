@@ -5,14 +5,11 @@ public class TintShaderController : MonoBehaviour
 {
     public Shader customSpriteShader;
     public float tintDuration = 1f; // Duration for tint changes
+    public MeshRenderer spriteMeshRender;
     private Material spriteMaterial;
     private Coroutine tintCoroutine;
 
-    private void Start()
-    {
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        spriteMaterial = meshRenderer.material;
-    }
+    private void Start() => spriteMaterial = spriteMeshRender.material;
 
     public void SetTintR(float value)
     {

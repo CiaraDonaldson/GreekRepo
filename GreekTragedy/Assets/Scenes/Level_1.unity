@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customSpriteShader: {fileID: 4800000, guid: a1b7276658fe4d640845b9d86dca2ea9, type: 3}
   tintDuration: 1
+  spriteMeshRender: {fileID: 364779111}
 --- !u!1 &367228810
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,7 +5392,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.4
+          m_FloatArgument: 0.8
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
@@ -5403,7 +5404,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.4
+          m_FloatArgument: 0.8
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2

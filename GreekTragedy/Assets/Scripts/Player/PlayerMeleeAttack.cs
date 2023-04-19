@@ -73,8 +73,6 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         if (!isActive) return;
         if (Time.deltaTime == 0) return;
-        if (playerRanged != null)
-            playerRanged.SetAbleToAttack(false);
         if (attackAvailable)
         {
             attackAvailable = false;
@@ -101,8 +99,6 @@ public class PlayerMeleeAttack : MonoBehaviour
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
         }
-        if (playerRanged != null)
-            playerRanged.SetAbleToAttack(false);
     }
 
 
