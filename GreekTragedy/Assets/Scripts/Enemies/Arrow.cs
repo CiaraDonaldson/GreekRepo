@@ -7,11 +7,13 @@ public class Arrow : MonoBehaviour
     public Vector2 direction;
     public float speed;
     public LayerMask hitLayers;
+    [SerializeField] GameObject arrowSpriteGO;
     [SerializeField] GameEvent OnArrowHit;
 
     private void Update()
     {
         transform.Translate(speed * Time.deltaTime * direction);
+        arrowSpriteGO.transform.right = direction;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

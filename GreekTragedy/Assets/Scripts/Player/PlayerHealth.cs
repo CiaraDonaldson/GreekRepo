@@ -17,6 +17,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     [SerializeField] CanvasRenderer damageVignette;
     [SerializeField] float damageVignetteTime;
     [SerializeField] UnityEvent<GameObject> OnPlayerDiedDelayed;
+    bool canBeHit;
     bool _damageVignetteActive;
     private int _currentHealth;
 
@@ -24,6 +25,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     {
         ResetHealth();
         damageVignette.gameObject.SetActive(false);
+        canBeHit = true;
     }
 
     /// <summary>
@@ -32,14 +34,18 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
     /// <param name="amount">Amount of damage you want to inflict</param>
     public void ApplyDamage(GameObject incObj, int amount)
     {
-        _currentHealth -= amount;
-        _currentHealth = _currentHealth < 0 ? 0 : _currentHealth;
-        OnPlayerDamaged?.Invoke(amount);
-        if (_currentHealth == 0)
+        if (canBeHit)
         {
-            OnPlayerDied?.Invoke(gameObject);
-            Invoke(nameof(SendDelayedDiedEvent), delayedDiedEventTime);
-            gameObject.SetActive(false);
+            canBeHit = false;
+            _currentHealth -= amount;
+            _currentHealth = _currentHealth < 0 ? 0 : _currentHealth;
+            OnPlayerDamaged?.Invoke(amount);
+            if (_currentHealth == 0)
+            {
+                OnPlayerDied?.Invoke(gameObject);
+                Invoke(nameof(SendDelayedDiedEvent), delayedDiedEventTime);
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -75,7 +81,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
         if (icon.TryGetComponent(out Image image))
             image.DOColor(new Color(1, 0, 0, 0), .2f);
         icon.transform.DOShakeRotation(.2f).SetEase(Ease.OutFlash);
-        icon.transform.DOMoveY(pos.y - 1, .2f).SetEase(Ease.OutSine).OnComplete(() => { healthIcons.Remove(icon); DOTween.KillAll(); Destroy(icon); });
+        icon.transform.DOMoveY(pos.y - 1, .2f).SetEase(Ease.OutSine).OnComplete(() => { healthIcons.Remove(icon); DOTween.KillAll(); Destroy(icon); canBeHit = true; });
     }
 
     void SendDelayedDiedEvent() => OnPlayerDiedDelayed?.Invoke(gameObject);

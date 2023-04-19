@@ -1,9 +1,11 @@
+using darcproducts;
 using UnityEngine;
 using UnityEngine.Events;
 
 public sealed class Deer : Enemy
 {
     [Range(0f, .2f)] public float moveRate;
+    public LayerMask hitLayers;
     public int attackDamage;
     public float attackRate;
     public float attackDistance;
@@ -16,6 +18,11 @@ public sealed class Deer : Enemy
     GameObject _player;
     float _currentAttack;
     bool _ableToAttack;
+    bool _charging;
+    float chargeDuration;
+    public float chargeSpeed;
+    Vector2 _chargeDirection;
+    public float waitTime;
 
     private void Awake()
     {
@@ -43,6 +50,30 @@ public sealed class Deer : Enemy
         if (!_ableToAttack) return;
         _currentAttack = _currentAttack < 0 ? 0 : _currentAttack -= Time.deltaTime;
 
+        if (_charging)
+        {
+            chargeDuration -= Time.deltaTime;
+            if (chargeDuration <= 0)
+            {
+                _charging = false;
+                waitTime = Random.Range(minMaxRandomWait.x, minMaxRandomWait.y);
+            }
+            else
+            {
+                Vector2 newPos = (Vector2)transform.position + _chargeDirection * chargeSpeed * Time.deltaTime;
+                newPos.x = Mathf.Clamp(newPos.x, -_playerMove.roomSize.x * .5f, _playerMove.roomSize.x * .5f);
+                newPos.y = Mathf.Clamp(newPos.y, -_playerMove.roomSize.y * .5f, _playerMove.roomSize.y * .5f);
+                transform.position = newPos;
+            }
+            return;
+        }
+
+        if (waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            return;
+        }
+
         if ((_targetLocation - (Vector2)transform.position).x < 0)
             _spriteRenderer.flipX = false;
         else if ((_targetLocation - (Vector2)transform.position).x > 0)
@@ -50,21 +81,35 @@ public sealed class Deer : Enemy
 
         if (_player == null) return;
         _targetLocation = _player.transform.position;
-        if (Vector3.Distance(_player.transform.position, transform.position) > attackDistance)
-            transform.position = Vector2.MoveTowards((Vector2)transform.position, _targetLocation, moveRate);
-        if (_currentAttack == 0 & Vector3.Distance(_player.transform.position, transform.position) <= attackDistance)
+
+        if (Vector3.Distance(_player.transform.position, transform.position) <= attackDistance)
         {
-            _currentAttack = attackRate;
-            if (_player.TryGetComponent(out IDamagable damagable))
+            if (_currentAttack == 0)
             {
-                damagable.ApplyDamage(gameObject, attackDamage);
-                if (_player.TryGetComponent(out PlayerMove move))
-                    move.KnockBack((_player.transform.position - transform.position).normalized);
-                OnAttackedTarget?.Invoke(gameObject);
+                _currentAttack = attackRate;
+                _charging = true;
+                chargeDuration = 1f;
+                chargeSpeed = 5f;
+                _chargeDirection = (_player.transform.position - transform.position).normalized;
             }
+        }
+        else
+        {
+            chargeSpeed = 1;
+            transform.position = Vector2.MoveTowards((Vector2)transform.position, _targetLocation, moveRate);
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!Utilities.IsInLayerMask(other.gameObject, hitLayers)) return;
+        if (other.gameObject.TryGetComponent(out IDamagable damage))
+        {
+            damage.ApplyDamage(other.gameObject, attackDamage);
+            if (other.TryGetComponent(out PlayerMove playerMove))
+                playerMove.KnockBack(other.transform.position - transform.position);
+        }
+    }
 
     void SetTargetLocation()
     {

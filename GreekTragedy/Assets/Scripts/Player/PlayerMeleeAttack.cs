@@ -21,11 +21,14 @@ public class PlayerMeleeAttack : MonoBehaviour
     [SerializeField] Vector2 damageOffset = Vector2.zero;
     [SerializeField] UnityEvent<GameObject> OnAttackHit; // used for attack FX
     [SerializeField] UnityEvent<Vector3> OnAttackMissed; // used for attack FX
+    PlayerRangeAttack playerRanged;
     bool attackAvailable = true;
     bool isActive;
     float _attackTime;
     Vector2 _attackPosition;
     Camera _cam;
+
+    private void Awake() => playerRanged = GetComponent<PlayerRangeAttack>();
 
     public Vector2 AttackPosition
     {
@@ -70,6 +73,8 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         if (!isActive) return;
         if (Time.deltaTime == 0) return;
+        if (playerRanged != null)
+            playerRanged.SetAbleToAttack(false);
         if (attackAvailable)
         {
             attackAvailable = false;
@@ -96,6 +101,8 @@ public class PlayerMeleeAttack : MonoBehaviour
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
         }
+        if (playerRanged != null)
+            playerRanged.SetAbleToAttack(false);
     }
 
 

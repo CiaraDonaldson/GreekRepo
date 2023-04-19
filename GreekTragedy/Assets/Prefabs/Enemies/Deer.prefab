@@ -102,15 +102,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e817b2913c91bb04784cb4da91a37fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 5
   useTargetWhenDamaged: 1
   OnDamaged: {fileID: 11400000, guid: 1cab5012c9cd9354c9e295989634d289, type: 2}
   OnDied: {fileID: 11400000, guid: 5b208cd54ad14654da6c5fc244ae07f0, type: 2}
   CurrentHealth: 0
-  moveRate: 0.06
+  moveRate: 0.038
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
   attackDamage: 1
-  attackRate: 1
-  attackDistance: 1
+  attackRate: 0.2
+  attackDistance: 3
   minMaxRandomWait: {x: 0.1, y: 3}
   spawnAttackDelay: 0.2
   OnAttackedTarget:
@@ -128,6 +131,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  chargeSpeed: 2
+  waitTime: 1
 --- !u!82 &-3963381405309753269
 AudioSource:
   m_ObjectHideFlags: 0
@@ -237,9 +242,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.19, y: -1}
+  m_Offset: {x: 0.82, y: -1}
   serializedVersion: 2
-  m_Radius: 2.44
+  m_Radius: 1.68
 --- !u!95 &5534320775261686799
 Animator:
   serializedVersion: 5

@@ -12,11 +12,15 @@ public class PlayerRangeAttack : MonoBehaviour
     [SerializeField] Image attackIndicator;
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] UnityEvent<GameObject> OnFiredBow;
+    PlayerMeleeAttack playerMelee;
     bool attackAvailable = true;
     bool isActive;
     float _attackTime;
     Vector2 _attackDirection;
     Camera _cam;
+
+    private void Awake() => playerMelee = GetComponent<PlayerMeleeAttack>();
+
 
     void Start()
     {
@@ -30,6 +34,8 @@ public class PlayerRangeAttack : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(attackDelay);
         attackAvailable = true;
+        if (playerMelee != null)
+            playerMelee.SetAbleToAttack(true);
     }
 
     void Update()
@@ -50,6 +56,8 @@ public class PlayerRangeAttack : MonoBehaviour
         {
             attackAvailable = false;
             _attackTime = 0;
+            if (playerMelee != null)
+                playerMelee.SetAbleToAttack(false);
             GameObject arrowGO = Instantiate(arrowPrefab, (Vector2)transform.position, Quaternion.identity);
             if (arrowGO.TryGetComponent(out Arrow arrow))
             {
@@ -57,6 +65,7 @@ public class PlayerRangeAttack : MonoBehaviour
                 arrow.direction = _attackDirection;
                 StartCoroutine(ResetAttack());
             }
+            else Destroy(arrowGO);
         }
     }
 }
