@@ -3854,7 +3854,7 @@ MonoBehaviour:
     line: Hello? The Three fates? I would ask forgiveness for my sudden appearance,
       but this time seems appropriate-
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
-    waitForContinueButton: 0
+    waitForContinueButton: 1
     textSpeed: 0.034
     delayAfterLine: 2
   - speaker: The Three Fates
@@ -4791,8 +4791,8 @@ MonoBehaviour:
     delayAfterLine: 1
   - speaker: Artemis
     line: "I see, I don\u2019t trust the simple messanger god to fix our problems,
-      but I\u2019m to weakened to join you after the fight we had. So take this bow,
-      Use it in earnest."
+      but I\u2019m too weakened to join you after the fight we had. So take this
+      bow, Use it in earnest."
     image: {fileID: 21300000, guid: a4e8dcc3debbc614e9f27de937e5837d, type: 3}
     waitForContinueButton: 1
     textSpeed: 0.02
@@ -5229,13 +5229,13 @@ MonoBehaviour:
   - speaker: Corrupted Artemis
     line: A fool has entered my domain.
     image: {fileID: 21300000, guid: 55dcb21361b44694bb93ccd7ec938954, type: 3}
-    waitForContinueButton: 0
+    waitForContinueButton: 1
     textSpeed: 0.1
     delayAfterLine: 1
   - speaker: Hermes
     line: Artemis? Of course, if I defeat you then you can take over this quest!
     image: {fileID: 21300000, guid: 05b5bce803c8d114381b9c454f94eebb, type: 3}
-    waitForContinueButton: 0
+    waitForContinueButton: 1
     textSpeed: 0.02
     delayAfterLine: 1
   - speaker: Corrupted Artemis

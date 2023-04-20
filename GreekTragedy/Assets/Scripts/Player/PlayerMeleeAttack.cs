@@ -29,7 +29,10 @@ public class PlayerMeleeAttack : MonoBehaviour
     Camera _cam;
     Animator anim;
 
+
+
     private void Awake() => playerRanged = GetComponent<PlayerRangeAttack>();
+
 
     public Vector2 AttackPosition
     {
