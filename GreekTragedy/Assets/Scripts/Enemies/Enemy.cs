@@ -33,6 +33,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         if (CurrentHealth != 0) return;
         OnDied.Invoke(gameObject);
         OnEnemyDied?.Invoke(gameObject);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
