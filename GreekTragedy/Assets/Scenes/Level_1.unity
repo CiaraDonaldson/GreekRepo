@@ -9727,7 +9727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 861891932}
   currentWaveText: {fileID: 120065551}
-  maxWaves: 1
+  maxWaves: 4
   enemiesPerWaveStatic: 0
   enemiesPerWaveAdds: 1
   timeBetweenSpawns: 0.4
