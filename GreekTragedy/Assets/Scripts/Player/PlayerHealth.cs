@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public sealed class PlayerHealth : MonoBehaviour, IDamagable
 {
+    public static bool IsDead;
     [SerializeField] int maxHealth;
     [SerializeField] CanvasRenderer healthIconRenderer;
     [SerializeField] GameObject healthIconPrefab;
@@ -42,6 +43,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
             OnPlayerDamaged?.Invoke(amount);
             if (_currentHealth == 0)
             {
+                IsDead = true;
                 OnPlayerDied?.Invoke(gameObject);
                 Invoke(nameof(SendDelayedDiedEvent), delayedDiedEventTime);
                 gameObject.SetActive(false);
@@ -51,6 +53,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamagable
 
     public void ResetHealth()
     {
+        IsDead = false;
         _currentHealth = maxHealth;
         for (int i = 0; i < maxHealth; i++)
             healthIcons.Add(Instantiate(healthIconPrefab, healthIconRenderer.transform));

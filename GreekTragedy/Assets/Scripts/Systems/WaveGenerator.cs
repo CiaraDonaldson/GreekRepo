@@ -24,15 +24,6 @@ public class WaveGenerator : MonoBehaviour
     bool _finishedSpawning = false;
     bool hasStarted;
 
-    private void Update()
-    {
-        if (!hasStarted & _finishedSpawning & _currentEnemies.Count == 0)
-        {
-            hasStarted = true;
-            OnClearedCurrentWave?.Invoke();
-        }
-    }
-
     private void OnEnable()
     {
         CurrentWave = 0;
@@ -46,6 +37,15 @@ public class WaveGenerator : MonoBehaviour
         StopAllCoroutines();
     }
 
+    private void Update()
+    {
+        if (!hasStarted & _finishedSpawning & _currentEnemies.Count == 0)
+        {
+            hasStarted = true;
+            OnClearedCurrentWave?.Invoke();
+        }
+    }
+
     [ContextMenu(nameof(SpawnWave))]
     public void StartSpawningWaves()
     {
@@ -55,7 +55,7 @@ public class WaveGenerator : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        if (CurrentWave == maxWaves)
+        if (CurrentWave == maxWaves && !PlayerHealth.IsDead)
         {
             OnFinishedAllWaves?.Invoke();
             yield break;

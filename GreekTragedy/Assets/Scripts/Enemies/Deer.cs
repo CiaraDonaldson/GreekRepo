@@ -103,7 +103,7 @@ public sealed class Deer : Enemy
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!Utilities.IsInLayerMask(other.gameObject, hitLayers)) return;
-        if (other.gameObject.TryGetComponent(out IDamagable damage))
+        if (other.gameObject.TryGetComponent(out IDamagable damage) && _charging)
         {
             damage.ApplyDamage(other.gameObject, attackDamage);
             if (other.TryGetComponent(out PlayerMove playerMove))
