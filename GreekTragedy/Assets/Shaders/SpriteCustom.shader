@@ -1,4 +1,4 @@
-Shader "Custom/Sprite"
+Shader "Custom/Sprite Transparent"
 {
     Properties
     {
@@ -8,13 +8,18 @@ Shader "Custom/Sprite"
         _TintG ("Tint Green", Range(0.0, 1.0)) = 1.0
         _TintB ("Tint Blue", Range(0.0, 1.0)) = 1.0
     }
+
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
         LOD 100
 
         Pass
         {
+            ZWrite Off
+            ColorMask RGB
+            Blend SrcAlpha OneMinusSrcAlpha
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -54,6 +59,12 @@ Shader "Custom/Sprite"
                 col.rgb = col.rgb * float3(_TintR, _TintG, _TintB);
                 col.rgb = col.rgb * _Color.rgb;
                 col.a *= _Color.a;
+
+                // Make black pixels transparent
+                if (col.r == 0 && col.g == 0 && col.b == 0) {
+                    col.a = 0;
+                }
+
                 return col;
             }
             ENDCG
