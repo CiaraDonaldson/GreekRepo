@@ -108,6 +108,8 @@ public sealed class Deer : Enemy
             damage.ApplyDamage(other.gameObject, attackDamage);
             if (other.TryGetComponent(out PlayerMove playerMove))
                 playerMove.KnockBack(other.transform.position - transform.position);
+            _ableToAttack = false;
+            Invoke(nameof(CanAttack), .3f);
         }
     }
 
