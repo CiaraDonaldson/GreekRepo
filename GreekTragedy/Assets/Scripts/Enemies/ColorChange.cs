@@ -9,6 +9,7 @@ public class ColorChange : MonoBehaviour
     public Color startColor, endColor;
     float startTime;
 
+    public GameObject effect;
 
     public float radius = 50f;
     private Vector3 center;
@@ -24,6 +25,8 @@ public class ColorChange : MonoBehaviour
     {
         if (engineBodyRenderer.material.color == endColor)
         {
+            effect.SetActive(true);
+            StartCoroutine(WaitTime());
 
             this.gameObject.TryGetComponent(out IDamagable success);                
                 success.ApplyDamage(this.gameObject, attackDamage); 
@@ -47,6 +50,11 @@ public class ColorChange : MonoBehaviour
                 }
             }
         }
+    }
+    private IEnumerator WaitTime()
+    {
+        yield return new WaitForSeconds(1f);
+
     }
 
     private IEnumerator ChangeEngineColour()

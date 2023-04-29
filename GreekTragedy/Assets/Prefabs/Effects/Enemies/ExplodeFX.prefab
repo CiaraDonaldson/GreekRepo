@@ -589,7 +589,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 17
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -795,7 +795,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 75
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1198,9 +1198,9 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0.4431373, g: 0.9943678, b: 1, a: 0.7490196}
-        key2: {r: 0.011764685, g: 0.38228527, b: 0.7490196, a: 0.5882353}
-        key3: {r: 0.7490196, g: 0.21782275, b: 0.011764685, a: 0}
+        key1: {r: 1, g: 0.75872743, b: 0.4431373, a: 0.7490196}
+        key2: {r: 0.7490196, g: 0.1697928, b: 0.011764685, a: 0.5882353}
+        key3: {r: 0.011764706, g: 0.65882355, b: 0.7490196, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -3849,7 +3849,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.9433962, g: 0.44796458, b: 0.24385896, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -3911,7 +3911,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5860,8 +5860,8 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0, g: 0.655246, b: 1, a: 0.36078432}
-        key2: {r: 0.0031517777, g: 0, b: 0.39607844, a: 0.83137256}
+        key1: {r: 1, g: 0.45365345, b: 0, a: 0.36078432}
+        key2: {r: 0.39607844, g: 0.043329358, b: 0, a: 0.83137256}
         key3: {r: 0.0627451, g: 0.54509807, b: 0.023529412, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -6628,7 +6628,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   LifetimeByEmitterSpeedModule:
-    enabled: 0
+    enabled: 1
     m_Curve:
       serializedVersion: 2
       minMaxState: 1
@@ -6639,18 +6639,18 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
+          value: 0.9594574
           inSlope: 0
-          outSlope: -0.8
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.2
+          value: 0.8756744
           inSlope: -0.8
-          outSlope: 0
+          outSlope: -0.8
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -6682,7 +6682,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_Range: {x: 0, y: 1}
+    m_Range: {x: 0.5, y: 1.5}
   ForceModule:
     enabled: 0
     x:
@@ -10540,15 +10540,15 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0.48235297, g: 1, b: 0.96927345, a: 0.7490196}
-        key2: {r: 0.011764685, g: 0.26839325, b: 0.7490196, a: 0.5882353}
+        key1: {r: 1, g: 0.86237645, b: 0.4431373, a: 0.7490196}
+        key2: {r: 0.7490196, g: 0.26453552, b: 0.011764685, a: 0.5882353}
         key3: {r: 0.011764706, g: 0.65882355, b: 0.7490196, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 15613
+        ctime1: 17155
         ctime2: 42405
         ctime3: 42405
         ctime4: 0
@@ -14015,7 +14015,7 @@ GameObject:
   - component: {fileID: 6658152740150360119}
   - component: {fileID: 6658152740150360118}
   m_Layer: 0
-  m_Name: HitFX
+  m_Name: ExplodeFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15269,8 +15269,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.12092379, b: 0.5176471, a: 0}
-        key1: {r: 0.011764685, g: 0.7490196, b: 0.571739, a: 0.7490196}
+        key0: {r: 0.61960787, g: 0.06867744, b: 0.06274508, a: 0}
+        key1: {r: 0.7490196, g: 0.33219972, b: 0.011764685, a: 0.7490196}
         key2: {r: 0.011764706, g: 0.65882355, b: 0.7490196, a: 0.5882353}
         key3: {r: 0.29803923, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

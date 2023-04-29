@@ -4037,7 +4037,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   OnEnemySpawned:
     m_PersistentCalls:
@@ -4094,7 +4094,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1494614176}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -5240,9 +5240,6 @@ MonoBehaviour:
   timeBetweenSpawns: 0.4
   enemies:
   - {fileID: 4232883471416590900, guid: 9fb7622e6a4d87a49897a97732cc75be, type: 3}
-  - {fileID: 4232883471416590900, guid: 0d151a2f70789454aa87c22fc0d42074, type: 3}
-  - {fileID: 4232883471416590900, guid: 0d151a2f70789454aa87c22fc0d42074, type: 3}
-  - {fileID: 4232883471416590900, guid: 9fb7622e6a4d87a49897a97732cc75be, type: 3}
   enemiesParent: {fileID: 1674343871}
   OnStartedWaves:
     m_PersistentCalls:
@@ -5316,7 +5313,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1494614176}
+      - m_Target: {fileID: 1155009580}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -5328,9 +5325,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1494614178}
+      - m_Target: {fileID: 1409113264}
         m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
-        m_MethodName: Trigger
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
