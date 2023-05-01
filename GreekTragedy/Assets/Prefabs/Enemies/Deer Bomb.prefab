@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -1569593259346778612}
   - component: {fileID: 9100035085396056815}
   m_Layer: 6
-  m_Name: Deer 2
+  m_Name: Deer Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
