@@ -302,7 +302,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   launchSpeed: 10
+  attackDamage: 3
   launching: 0
+  thisColor: {r: 0.7075472, g: 0.12949444, b: 0.58694196, a: 1}
+  bodyRenderer: {fileID: 4232883471416590890}
 --- !u!1 &9216878782049112360
 GameObject:
   m_ObjectHideFlags: 0

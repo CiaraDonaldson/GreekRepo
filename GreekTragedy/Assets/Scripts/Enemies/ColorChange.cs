@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    public Renderer engineBodyRenderer;
+    public Renderer bodyRenderer;
     public float speed;
     public Color startColor, endColor;
     float startTime;
@@ -23,7 +23,7 @@ public class ColorChange : MonoBehaviour
     }
     void Update()
     {
-        if (engineBodyRenderer.material.color == endColor)
+        if (bodyRenderer.material.color == endColor)
         {
             effect.SetActive(true);
             StartCoroutine(WaitTime());
@@ -60,10 +60,10 @@ public class ColorChange : MonoBehaviour
     private IEnumerator ChangeEngineColour()
     {
         float tick = 0f;
-        while (engineBodyRenderer.material.color != endColor)
+        while (bodyRenderer.material.color != endColor)
         {
             tick += Time.deltaTime * speed;
-            engineBodyRenderer.material.color = Color.Lerp(startColor, endColor, tick);
+            bodyRenderer.material.color = Color.Lerp(startColor, endColor, tick);
             yield return null;
         }
     }
