@@ -51,9 +51,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         GameObject dmg = Instantiate(damageText, location.transform.position + (Vector3)damageOffset, Quaternion.identity);
         if (dmg.TryGetComponent(out TMP_Text text))
-        {
             text.text = attackDamage.ToString();
-        }
     }
 
     public void SetAbleToAttack(bool newValue) => isActive = newValue;

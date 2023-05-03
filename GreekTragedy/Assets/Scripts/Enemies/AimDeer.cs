@@ -27,7 +27,12 @@ public class AimDeer : Enemy
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    private void Disable()
+    {
+        CancelInvoke(nameof(ResetLaunchPostion));
+    }
+
+    void FixedUpdate()
     {
         if (playerTransform == null) return;
 
@@ -60,11 +65,14 @@ public class AimDeer : Enemy
             transform.position = Vector3.MoveTowards(transform.position, launchTarget, launchSpeed * Time.deltaTime);
             if (transform.position == launchTarget)
             {
-                //ApplyDamage(gameObject, MaxHealth);
-                _hasLaunchPosition = false;
+                Invoke(nameof(ResetLaunchPostion),3f);
             }
         }
+    }
 
+    private void ResetLaunchPostion()
+    {
+        _hasLaunchPosition = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
