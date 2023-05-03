@@ -45,7 +45,7 @@ public class AimDeer : Enemy
         {
             StartCoroutine(LaunchAfterWait());
 
-            /* Vector3 targetDirection = playerTransform.position - transform.position;
+             /*Vector3 targetDirection = playerTransform.position - transform.position;
              float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
              Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
              transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);*/
@@ -60,7 +60,7 @@ public class AimDeer : Enemy
             transform.position = Vector3.MoveTowards(transform.position, launchTarget, launchSpeed * Time.deltaTime);
             if (transform.position == launchTarget)
             {
-                ApplyDamage(gameObject, MaxHealth);
+                StartCoroutine(LaunchAfterWait());
             }
         }
 
@@ -68,17 +68,22 @@ public class AimDeer : Enemy
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_hasHit) return;
-        if (other.gameObject.TryGetComponent(out IDamagable success))
-        {
-            _hasHit = true;
-            success.ApplyDamage(other.gameObject, attackDamage);
-        }
+        
+
+            if (_hasHit) return;
+            if (other.gameObject.TryGetComponent(out IDamagable success))
+            {
+
+                _hasHit = true;
+                success.ApplyDamage(other.gameObject, attackDamage);
+            }
+       
     }
 
 
     IEnumerator LaunchAfterWait()
     {
+        launching = false;
         yield return new WaitForSeconds(3f);
         launching = true;
     }
