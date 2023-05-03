@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public class AimandCharge : Enemy
+public class AimDeer : Enemy
 {
     public float rotationSpeed = 5f;
     public float launchSpeed = 10f;

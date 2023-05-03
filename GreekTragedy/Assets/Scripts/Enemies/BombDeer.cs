@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ColorChange : Enemy
+public class BombDeer : Enemy
 {
     public Renderer bodyRenderer;
     [Range(0f, 1f)] public float colorChangeSpeed;
