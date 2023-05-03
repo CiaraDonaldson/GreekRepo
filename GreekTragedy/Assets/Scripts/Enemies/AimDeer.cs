@@ -61,6 +61,7 @@ public class AimDeer : Enemy
             if (transform.position == launchTarget)
             {
                 ApplyDamage(gameObject, MaxHealth);
+                _hasLaunchPosition = false;
             }
         }
 
