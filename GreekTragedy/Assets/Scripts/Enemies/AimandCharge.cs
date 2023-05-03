@@ -30,11 +30,7 @@ public class AimandCharge : Enemy
     void Update()
     {
         if (playerTransform == null) return;
-        if (!_hasLaunchPosition)
-        {
-            _hasLaunchPosition = true;
-            launchTarget = playerTransform.position;
-        }
+
         if ((_targetLocation - (Vector2)transform.position).x < 0)
         {
             _spriteRenderer.flipX = false;
@@ -43,27 +39,24 @@ public class AimandCharge : Enemy
         {
             _spriteRenderer.flipX = true;
         }
-        if ((_targetLocation - (Vector2)transform.position).y < 0)
-        {
-            _spriteRenderer.flipY = true;
-        }
-        else if ((_targetLocation - (Vector2)transform.position).y > 0)
-        {
-            _spriteRenderer.flipY = false;
-        }
 
         bodyRenderer.material.color = thisColor;
         if (launching == false)
         {
             StartCoroutine(LaunchAfterWait());
 
-            Vector3 targetDirection = playerTransform.position - transform.position;
-            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+            /* Vector3 targetDirection = playerTransform.position - transform.position;
+             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);*/
         }
         else if (launching == true)
         {
+            if (!_hasLaunchPosition)
+            {
+                _hasLaunchPosition = true;
+                launchTarget = playerTransform.position;
+            }
             transform.position = Vector3.MoveTowards(transform.position, launchTarget, launchSpeed * Time.deltaTime);
             if (transform.position == launchTarget)
             {
