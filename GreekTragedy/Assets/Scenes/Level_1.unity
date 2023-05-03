@@ -3073,10 +3073,10 @@ MonoBehaviour:
   currentState: 0
   arrowDamage: 1
   healthBar: {fileID: 2114093622}
-  moveRate: 2.2
+  moveRate: 3
   arrowPrefab: {fileID: 7148367544027143770, guid: d9e756933a7a1864a8505e8df8627861, type: 3}
-  numberOfShots: 15
-  numberOfShotsEnranged: 30
+  numberOfShots: 25
+  numberOfShotsEnranged: 50
   attackLocations:
   - {fileID: 800382246}
   - {fileID: 1104042754}
