@@ -46,7 +46,7 @@ public class PlayerMeleeAttack : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-   
+
     public void ShowDamage(GameObject location)
     {
         GameObject dmg = Instantiate(damageText, location.transform.position + (Vector3)damageOffset, Quaternion.identity);
@@ -64,17 +64,19 @@ public class PlayerMeleeAttack : MonoBehaviour
         attackAvailable = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         _attackTime = _attackTime > attackDelay ? attackDelay : _attackTime += Time.deltaTime;
         attackIndicator.fillAmount = Utilities.Remap(_attackTime, 0, attackDelay, 0, 1);
         _attackPosition = (Vector2)transform.position + (mousePos - (Vector2)transform.position).normalized * meleeAttackDistance;
         aimCursor.transform.position = _attackPosition;
+    }
+
+    void Update()
+    {
         if (Input.GetKeyDown(attackKey))
             AttacKTargets();
-
-       
     }
 
     void AttacKTargets()
@@ -107,7 +109,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             }
             OnAttackHit?.Invoke(hitTargets[0].gameObject);
             StartCoroutine(ResetAttack());
-            
+
         }
     }
 

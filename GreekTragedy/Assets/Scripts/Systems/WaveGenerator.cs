@@ -19,6 +19,7 @@ public class WaveGenerator : MonoBehaviour
     [SerializeField] UnityEvent OnStartedWaves;
     [SerializeField] UnityEvent<GameObject> OnEnemySpawned;
     [SerializeField] UnityEvent OnClearedCurrentWave;
+    [SerializeField] UnityEvent OnLastWave;
     [SerializeField] UnityEvent OnFinishedAllWaves;
     readonly List<GameObject> _currentEnemies = new();
     bool _finishedSpawning = false;
@@ -60,13 +61,16 @@ public class WaveGenerator : MonoBehaviour
             OnFinishedAllWaves?.Invoke();
             yield break;
         }
+        else if (CurrentWave == maxWaves - 1)
+            OnLastWave?.Invoke();
         currentWaveText.text = $"Waves Left: {Mathf.Abs(maxWaves - CurrentWave - 1)}";
         int totalToSpawn = enemiesPerWaveStatic + enemiesPerWaveAdds;
         for (int i = 0; i < totalToSpawn; i++)
         {
             yield return new WaitForSecondsRealtime(timeBetweenSpawns);
             Vector2 newPos = new(Random.Range(-playerMove.roomSize.x * .5f, playerMove.roomSize.x * .5f), Random.Range(-playerMove.roomSize.y * .5f, playerMove.roomSize.y * .5f));
-            GameObject e = Instantiate(enemies[maxWaves % enemies.Length], newPos, Quaternion.identity, enemiesParent);
+            int GOIndex = Mathf.Clamp(CurrentWave, 0, enemies.Length - 1);
+            GameObject e = Instantiate(enemies[GOIndex], newPos, Quaternion.identity, enemiesParent);
             _currentEnemies.Add(e);
             OnEnemySpawned?.Invoke(e);
         }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4232883471416590901}
   - component: {fileID: 4232883471416590890}
-  - component: {fileID: 4232883471416590891}
   - component: {fileID: -3963381405309753269}
   - component: {fileID: 6195455020277732662}
   - component: {fileID: 5534320775261686799}
@@ -92,49 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4232883471416590891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4232883471416590900}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e817b2913c91bb04784cb4da91a37fce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 5
-  useTargetWhenDamaged: 1
-  OnDamaged: {fileID: 11400000, guid: 1cab5012c9cd9354c9e295989634d289, type: 2}
-  OnDied: {fileID: 11400000, guid: 5b208cd54ad14654da6c5fc244ae07f0, type: 2}
-  CurrentHealth: 0
-  moveRate: 0.038
-  hitLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  attackDamage: 1
-  attackRate: 0.2
-  attackDistance: 3
-  minMaxRandomWait: {x: 0.1, y: 3}
-  spawnAttackDelay: 0.2
-  OnAttackedTarget:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5179140346833123030}
-        m_TargetAssemblyTypeName: AudioFX, Assembly-CSharp
-        m_MethodName: PlayFX
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  chargeSpeed: 2
-  waitTime: 1
 --- !u!82 &-3963381405309753269
 AudioSource:
   m_ObjectHideFlags: 0
@@ -300,12 +256,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a3739c2ec40e84f85bb5f70ff9ea7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 5
+  useTargetWhenDamaged: 0
+  OnDamaged: {fileID: 11400000, guid: 1cab5012c9cd9354c9e295989634d289, type: 2}
+  OnDied: {fileID: 11400000, guid: 5b208cd54ad14654da6c5fc244ae07f0, type: 2}
+  CurrentHealth: 0
   rotationSpeed: 3
   launchSpeed: 10
-  attackDamage: 3
+  attackDamage: 1
   launching: 0
   thisColor: {r: 0.7075472, g: 0.12949444, b: 0.58694196, a: 1}
   bodyRenderer: {fileID: 4232883471416590890}
+  _spriteRenderer: {fileID: 4232883471416590890}
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &9216878782049112360
 GameObject:
   m_ObjectHideFlags: 0

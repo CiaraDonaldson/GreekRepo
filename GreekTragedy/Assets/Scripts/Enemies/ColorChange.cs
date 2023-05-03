@@ -1,74 +1,93 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChange : MonoBehaviour
+public class ColorChange : Enemy
 {
     public Renderer bodyRenderer;
-    public float speed;
+    [Range(0f, 1f)] public float colorChangeSpeed;
     public Color startColor, endColor;
-    float startTime;
-
+    [Range(0f, .1f)] public float moveRate;
     public GameObject effect;
 
     public float radius = 50f;
-    private Vector3 center;
     public int attackDamage;
+    GameObject _player;
+    Vector2 _targetLocation;
+    SpriteRenderer _spriteRenderer;
+    bool _hasExploded;
+    bool _effectCreated;
+    private float elapsedColorChangeTime = 0f;
 
-    void Start()
+
+    private void Awake()
     {
-        StartCoroutine(ChangeEngineColour());
-      
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _player = GameObject.FindWithTag("Player");
     }
+
+    private void FixedUpdate()
+    {
+        if (_player == null) return;
+        _targetLocation = _player.transform.position;
+        if ((_targetLocation - (Vector2)transform.position).x < 0)
+            _spriteRenderer.flipX = false;
+        else if ((_targetLocation - (Vector2)transform.position).x > 0)
+            _spriteRenderer.flipX = true;
+        transform.position = Vector2.MoveTowards((Vector2)transform.position, _targetLocation, moveRate);
+    }
+
     void Update()
     {
+        ChangeColor();
         if (bodyRenderer.material.color == endColor)
         {
-            effect.SetActive(true);
-            StartCoroutine(WaitTime());
-
-            this.gameObject.TryGetComponent(out IDamagable success);                
-                success.ApplyDamage(this.gameObject, attackDamage); 
-                
-
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius);
-
-            foreach (Collider2D nearbyObject in hitColliders)
+            if (!_hasExploded)
             {
-                Debug.Log("Something here");
-                if (nearbyObject.gameObject.tag == "Player")
-                {
-                    if (nearbyObject.gameObject.TryGetComponent(out IDamagable damage))
-                    {
-                        damage.ApplyDamage(nearbyObject.gameObject, attackDamage);
-                        if (nearbyObject.TryGetComponent(out PlayerMove playerMove))
-                            playerMove.KnockBack(nearbyObject.transform.position - transform.position);
-                       
-                    }
-                    Debug.Log("Hit");
-                }
+                _hasExploded = true;
+                StartCoroutine(Explode());
             }
         }
     }
-    private IEnumerator WaitTime()
+    private IEnumerator Explode()
     {
         yield return new WaitForSeconds(1f);
 
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach (Collider2D nearbyObject in hitColliders)
+        {
+            if (nearbyObject.gameObject.CompareTag("Player"))
+            {
+                if (nearbyObject.gameObject.TryGetComponent(out IDamagable damage))
+                {
+                    damage.ApplyDamage(nearbyObject.gameObject, attackDamage);
+                    if (nearbyObject.TryGetComponent(out PlayerMove playerMove))
+                        playerMove.KnockBack(nearbyObject.transform.position - transform.position);
+
+                }
+            }
+        }
+        if (!_effectCreated)
+        {
+            _effectCreated = true;
+            Instantiate(effect, transform.position, Quaternion.identity);
+        }
+        if (gameObject.TryGetComponent(out IDamagable success))
+            success.ApplyDamage(gameObject, MaxHealth);
     }
 
-    private IEnumerator ChangeEngineColour()
+    private void ChangeColor()
     {
-        float tick = 0f;
-        while (bodyRenderer.material.color != endColor)
+        if (bodyRenderer.material.color != endColor)
         {
-            tick += Time.deltaTime * speed;
-            bodyRenderer.material.color = Color.Lerp(startColor, endColor, tick);
-            yield return null;
+            elapsedColorChangeTime += Time.deltaTime;
+            float t = elapsedColorChangeTime / colorChangeSpeed;
+            t = Mathf.Clamp01(t);
+            bodyRenderer.material.color = Color.Lerp(startColor, endColor, t);
         }
     }
     private void OnDrawGizmosSelected() // for visualizing location in scene vew during play
-    { 
+    {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, radius);
     }
