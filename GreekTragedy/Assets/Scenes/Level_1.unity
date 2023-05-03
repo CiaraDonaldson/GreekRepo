@@ -988,7 +988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 861891932}
   currentWaveText: {fileID: 120065551}
-  maxWaves: 4
+  maxWaves: 3
   enemiesPerWaveStatic: 0
   enemiesPerWaveAdds: 1
   timeBetweenSpawns: 0.4
@@ -3073,10 +3073,10 @@ MonoBehaviour:
   currentState: 0
   arrowDamage: 1
   healthBar: {fileID: 2114093622}
-  moveRate: 2.2
+  moveRate: 3
   arrowPrefab: {fileID: 7148367544027143770, guid: d9e756933a7a1864a8505e8df8627861, type: 3}
-  numberOfShots: 15
-  numberOfShotsEnranged: 30
+  numberOfShots: 25
+  numberOfShotsEnranged: 50
   attackLocations:
   - {fileID: 800382246}
   - {fileID: 1104042754}
@@ -3784,7 +3784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 861891932}
   currentWaveText: {fileID: 120065551}
-  maxWaves: 1
+  maxWaves: 3
   enemiesPerWaveStatic: 0
   enemiesPerWaveAdds: 1
   timeBetweenSpawns: 0.4
@@ -4932,9 +4932,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 861891932}
   currentWaveText: {fileID: 120065551}
-  maxWaves: 1
+  maxWaves: 3
   enemiesPerWaveStatic: 0
-  enemiesPerWaveAdds: 1
+  enemiesPerWaveAdds: 2
   timeBetweenSpawns: 0.4
   enemies:
   - {fileID: 4232883471416590900, guid: 0d151a2f70789454aa87c22fc0d42074, type: 3}
