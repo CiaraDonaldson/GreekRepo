@@ -115,7 +115,8 @@ MonoBehaviour:
   attackRate: 0.2
   attackDistance: 3
   minMaxRandomWait: {x: 0.1, y: 3}
-  spawnAttackDelay: 0.2
+  spawnAttackDelay: 1
+  attackDelay: 0.3
   OnAttackedTarget:
     m_PersistentCalls:
       m_Calls:
