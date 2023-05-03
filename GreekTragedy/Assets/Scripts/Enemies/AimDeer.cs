@@ -24,7 +24,9 @@ public class AimDeer : Enemy
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
