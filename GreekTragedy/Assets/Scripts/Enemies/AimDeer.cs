@@ -20,11 +20,13 @@ public class AimDeer : Enemy
     bool _hasHit;
     bool _hasLaunchPosition;
     public LayerMask hitLayers;
+    bool _reset;
 
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        bodyRenderer.material.color = thisColor;
     }
 
     private void Disable()
@@ -44,8 +46,6 @@ public class AimDeer : Enemy
         {
             _spriteRenderer.flipX = true;
         }
-
-        bodyRenderer.material.color = thisColor;
         if (launching == false)
         {
             StartCoroutine(LaunchAfterWait());
@@ -65,7 +65,11 @@ public class AimDeer : Enemy
             transform.position = Vector3.MoveTowards(transform.position, launchTarget, launchSpeed * Time.deltaTime);
             if (transform.position == launchTarget)
             {
-                Invoke(nameof(ResetLaunchPostion),3f);
+                if (!_reset)
+                {
+                    _reset = true;
+                    Invoke(nameof(ResetLaunchPostion), 3f);
+                }
             }
         }
     }
@@ -73,6 +77,7 @@ public class AimDeer : Enemy
     private void ResetLaunchPostion()
     {
         _hasLaunchPosition = false;
+        _reset = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
