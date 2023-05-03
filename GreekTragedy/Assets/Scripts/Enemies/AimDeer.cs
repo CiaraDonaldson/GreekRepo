@@ -60,7 +60,7 @@ public class AimDeer : Enemy
             transform.position = Vector3.MoveTowards(transform.position, launchTarget, launchSpeed * Time.deltaTime);
             if (transform.position == launchTarget)
             {
-                ApplyDamage(gameObject, MaxHealth);
+                //ApplyDamage(gameObject, MaxHealth);
                 _hasLaunchPosition = false;
             }
         }
